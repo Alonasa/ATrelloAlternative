@@ -3,12 +3,12 @@ import React from 'react';
 type PropsType = {
   mainTitle: string
   task: taskType[]
-  removeTask: (id: number)=> void
+  removeTask: (id: string)=> void
   changeFilter: (filter: FilterValueType)=>void
 }
 
 export type taskType = {
-  id: number
+  id: string
   title: string
   isDone: boolean
 }
@@ -17,12 +17,12 @@ export type FilterValueType = 'All' |'Active'|'Completed'
 
 
 export const Todolist = (props: PropsType) => {
-  const removeTaskHandler = (id: number) => {
+  const removeTaskHandler = (id: string) => {
     props.removeTask(id)
   }
   
   const changeFilterHandler = (filter: FilterValueType) => {
-  	props.changeFilter(filter)
+	props.changeFilter(filter)
   }
   
   return (
