@@ -4,18 +4,25 @@ type PropsType = {
   mainTitle: string
   task: taskType[]
   removeTask: (id: number)=> void
+  changeFilter: (filter: FilterValueType)=>void
 }
 
-type taskType = {
+export type taskType = {
   id: number
   title: string
   isDone: boolean
 }
 
+export type FilterValueType = 'All' |'Active'|'Completed'
+
 
 export const Todolist = (props: PropsType) => {
   const removeTaskHandler = (id: number) => {
     props.removeTask(id)
+  }
+  
+  const changeFilterHandler = (filter: FilterValueType) => {
+  	props.changeFilter(filter)
   }
   
   return (
@@ -37,9 +44,9 @@ export const Todolist = (props: PropsType) => {
 		})}
 	  </ul>
 	  <div>
-		<button>All</button>
-		<button>Active</button>
-		<button>Completed</button>
+		<button onClick={()=>changeFilterHandler('All')}>All</button>
+		<button onClick={()=>changeFilterHandler('Active')}>Active</button>
+		<button onClick={()=>changeFilterHandler('Completed')}>Completed</button>
 	  </div>
 	</div>
   
