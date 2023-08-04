@@ -1,0 +1,57 @@
+.error {
+	animation: shaking 5s;
+	animation-iteration-count: infinite;
+
+    font-weight: bold;
+    color: purple;
+}
+
+@keyframes shaking {
+    0% {
+        transform: translateX(0)
+    }
+    25% {
+        transform: translateX(5px)
+    }
+    50% {
+        transform: translateX(-5px)
+    }
+    75% {
+        transform: translateX(5px)
+    }
+    100% {
+        transform: translateX(0)
+    }
+}
+
+.button {
+    padding: 10px 15px;
+    border-radius: 10%;
+    background-color: purple;
+    color: antiquewhite;
+    border: 2px solid antiquewhite;
+}
+
+.active {
+    background-color: antiquewhite;
+    border: 2px solid purple;
+    color: purple;
+}
+
+.list {
+    padding: 0;
+    list-style: none;
+}
+
+.list li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 35px;
+}
+
+.finished {
+    opacity: 0.5;
+    text-decoration: purple line-through;
+}
