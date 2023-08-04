@@ -64,14 +64,14 @@ export const Todolist = (props: PropsType) => {
 			   onKeyPress={(e) => onKeyPressHandler(e)}/>
 		<button onClick={() => addTaskHandler(title)}>+</button>
 		{error &&
-        <span className={s.error}><br/>You can't add empty task</span>}
+        <p className={s.error}>You can't add empty task</p>}
 	  </div>
 	  <ul className={s.list}>
 		{props.task.map(el => {
 		  return (
 			<li className={el.isDone ? s.finished : ''} key={el.id}>
 			  <article><input type="checkbox" checked={el.isDone}
-					   onClick={() => changeTaskStatusHandler(el.id)}/>
+					   onChange={() => changeTaskStatusHandler(el.id)}/>
 				<span>{el.title}</span>
 			  </article>
 			  <button onClick={() => removeTaskHandler(el.id)}>x</button>
