@@ -1,4 +1,5 @@
 import React, {FormEvent, KeyboardEvent, useState} from 'react';
+import s from './Todolist.module.css';
 
 type PropsType = {
   mainTitle: string
@@ -6,6 +7,7 @@ type PropsType = {
   removeTask: (id: string) => void
   addTask: (title: string) => void
   changeFilter: (filter: FilterValueType) => void
+  filter: FilterValueType
 }
 
 export type taskType = {
@@ -55,7 +57,7 @@ export const Todolist = (props: PropsType) => {
 	  <div>
 		<input value={title} onInput={(e) => onInputHandler(e)} onKeyPress={(e)=>onKeyPressHandler(e)}/>
 		<button onClick={() => addTaskHandler(title)}>+</button>
-		{error && <span><br/>You can't add empty task</span>}
+		{error && <span className={s.error}><br/>You can't add empty task</span>}
 	  </div>
 	  <ul>
 		{props.task.map(el => {
@@ -69,9 +71,9 @@ export const Todolist = (props: PropsType) => {
 		})}
 	  </ul>
 	  <div>
-		<button onClick={() => changeFilterHandler('All')}>All</button>
-		<button onClick={() => changeFilterHandler('Active')}>Active</button>
-		<button onClick={() => changeFilterHandler('Completed')}>Completed
+		<button className={props.filter === 'All'? `${s.button} ${s.active}`: s.button} onClick={() => changeFilterHandler('All')}>All</button>
+		<button className={props.filter === 'Active'? `${s.button} ${s.active}`: s.button} onClick={() => changeFilterHandler('Active')}>Active</button>
+		<button className={props.filter === 'Completed'? `${s.button} ${s.active}`: s.button} onClick={() => changeFilterHandler('Completed')}>Completed
 		</button>
 	  </div>
 	</div>
