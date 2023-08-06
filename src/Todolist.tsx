@@ -6,7 +6,7 @@ type PropsType = {
   tlId: string
   task: taskType[]
   removeTask: (id: string) => void
-  addTask: (title: string) => void
+  addTask: (tlId: string, title: string) => void
   changeFilter: (filter: FilterValueType) => void
   filter: FilterValueType
   changeTaskStatus: (id: string) => void
@@ -35,7 +35,7 @@ export const Todolist = (props: PropsType) => {
   
   const addTaskHandler = (title: string) => {
 	if (title.trim()) {
-	  props.addTask(title)
+	  props.addTask(props.tlId,title)
 	  setTitle('')
 	} else {
 	  setError(true)

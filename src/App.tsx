@@ -54,8 +54,8 @@ function App() {
     // setFilter(filter)
   }
   
-  const addTask = (title: string) => {
-    // setTasks([{id: v1(), title: title, isDone: false}, ...tasks])
+  const addTask = (tlId: string, title: string) => {
+    setTasks({...tasks, [tlId]:[{id: v1(), title: title, isDone: false}, ...tasks[tlId]]})
   }
   
   const changeTaskStatus = (id: string) => {
