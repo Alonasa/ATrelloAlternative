@@ -3,6 +3,7 @@ import s from './Todolist.module.css';
 
 type PropsType = {
   mainTitle: string
+  tlId: string
   task: taskType[]
   removeTask: (id: string) => void
   addTask: (title: string) => void
