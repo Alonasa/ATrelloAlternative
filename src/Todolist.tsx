@@ -5,11 +5,11 @@ type PropsType = {
   mainTitle: string
   tlId: string
   task: taskType[]
-  removeTask: (id: string) => void
-  addTask: (title: string) => void
-  changeFilter: (filter: FilterValueType) => void
+  removeTask: (tlId: string, id: string) => void
+  addTask: (tlId: string, title: string) => void
+  changeFilter: (tlId: string, filter: FilterValueType) => void
   filter: FilterValueType
-  changeTaskStatus: (id: string) => void
+  changeTaskStatus: (tlId: string, id: string) => void
 }
 
 export type taskType = {
@@ -30,12 +30,12 @@ export const Todolist = (props: PropsType) => {
   let [error, setError] = useState<boolean>(false);
   
   const removeTaskHandler = (id: string) => {
-	props.removeTask(id)
+	props.removeTask(props.tlId, id)
   }
   
   const addTaskHandler = (title: string) => {
 	if (title.trim()) {
-	  props.addTask(title)
+	  props.addTask(props.tlId,title)
 	  setTitle('')
 	} else {
 	  setError(true)
@@ -54,11 +54,11 @@ export const Todolist = (props: PropsType) => {
   }
   
   const changeFilterHandler = (filter: FilterValueType) => {
-	props.changeFilter(filter)
+	props.changeFilter(props.tlId, filter)
   }
   
   const changeTaskStatusHandler = (id: string) => {
-	props.changeTaskStatus(id)
+	props.changeTaskStatus(props.tlId, id)
   }
   
   return (

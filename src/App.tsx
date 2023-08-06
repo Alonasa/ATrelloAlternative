@@ -11,7 +11,7 @@ type TodolistsType = {
 }
 
 function App() {
-  const [filter, setFilter] = useState<FilterValueType>('All');
+  //const [filter, setFilter] = useState<FilterValueType>('All');
   //
   // let [tasks, setTasks] = useState<taskType[]>([
   //   {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -46,30 +46,31 @@ function App() {
   });
   
   
-  const removeTask = (id: string) => {
-    //setTasks([...tasks.filter(t => t.id !== id)])
+  const removeTask = (tlId: string, id: string) => {
+    setTasks({...tasks, [tlId]: [...tasks[tlId].filter(t => t.id !== id)]})
   }
   
-  const changeFilter = (filter: FilterValueType) => {
+  const changeFilter = (tlId: string, filter: FilterValueType) => {
     // setFilter(filter)
+    setTodolists(todolists.map(tl=> tl.id===tlId ? {...tl, filter}:tl))
   }
   
-  const addTask = (title: string) => {
-    // setTasks([{id: v1(), title: title, isDone: false}, ...tasks])
+  const addTask = (tlId: string, title: string) => {
+    setTasks({...tasks, [tlId]:[{id: v1(), title: title, isDone: false}, ...tasks[tlId]]})
   }
   
-  const changeTaskStatus = (id: string) => {
-    //setTasks(tasks.map(t => t.id === id ? {...t, isDone: !t.isDone} : t))
+  const changeTaskStatus = (tlId: string, id: string) => {
+    setTasks({...tasks, [tlId]: tasks[tlId].map(t => t.id === id ? {...t, isDone: !t.isDone} : t)})
   }
   
   return (
     <div className="App">
       {todolists.map(tl => {
         let tasksCopy = tasks[tl.id];
-        if (filter === 'Active') {
+        if (tl.filter === 'Active') {
           tasksCopy = tasks[tl.id].filter(t => !t.isDone)
         }
-        if (filter === 'Completed') {
+        if (tl.filter === 'Completed') {
           tasksCopy = tasks[tl.id].filter(t => t.isDone)
         }
         
