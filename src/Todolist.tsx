@@ -3,6 +3,7 @@ import s from './Todolist.module.css';
 
 type PropsType = {
   mainTitle: string
+  tlId: string
   task: taskType[]
   removeTask: (id: string) => void
   addTask: (title: string) => void
@@ -15,6 +16,10 @@ export type taskType = {
   id: string
   title: string
   isDone: boolean
+}
+
+export type TasksType = {
+  [key: string]: Array<taskType>
 }
 
 export type FilterValueType = 'All' | 'Active' | 'Completed'
