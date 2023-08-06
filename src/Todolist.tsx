@@ -9,7 +9,7 @@ type PropsType = {
   addTask: (tlId: string, title: string) => void
   changeFilter: (filter: FilterValueType) => void
   filter: FilterValueType
-  changeTaskStatus: (id: string) => void
+  changeTaskStatus: (tlId: string, id: string) => void
 }
 
 export type taskType = {
@@ -58,7 +58,7 @@ export const Todolist = (props: PropsType) => {
   }
   
   const changeTaskStatusHandler = (id: string) => {
-	props.changeTaskStatus(id)
+	props.changeTaskStatus(props.tlId, id)
   }
   
   return (

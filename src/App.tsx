@@ -58,8 +58,8 @@ function App() {
     setTasks({...tasks, [tlId]:[{id: v1(), title: title, isDone: false}, ...tasks[tlId]]})
   }
   
-  const changeTaskStatus = (id: string) => {
-    //setTasks(tasks.map(t => t.id === id ? {...t, isDone: !t.isDone} : t))
+  const changeTaskStatus = (tlId: string, id: string) => {
+    setTasks({...tasks, [tlId]: tasks[tlId].map(t => t.id === id ? {...t, isDone: !t.isDone} : t)})
   }
   
   return (
