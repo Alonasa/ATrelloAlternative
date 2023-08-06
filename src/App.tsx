@@ -46,8 +46,8 @@ function App() {
   });
   
   
-  const removeTask = (id: string) => {
-    //setTasks([...tasks.filter(t => t.id !== id)])
+  const removeTask = (tlId: string, id: string) => {
+    setTasks({...tasks, [tlId]: [...tasks[tlId].filter(t => t.id !== id)]})
   }
   
   const changeFilter = (filter: FilterValueType) => {
