@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
+import {EditableSpan} from './components/EditableSpan';
 
 type PropsType = {
   mainTitle: string
@@ -11,6 +12,7 @@ type PropsType = {
   changeFilter: (tlId: string, filter: FilterValueType) => void
   filter: FilterValueType
   changeTaskStatus: (tlId: string, id: string) => void
+  changeTitle: (tlId: string, id: string, newTitle: string) => void
 }
 
 export type taskType = {
@@ -52,11 +54,16 @@ export const Todolist = (props: PropsType) => {
 	  </div>
 	  <ul className={s.list}>
 		{props.task.map(el => {
+		  const onChangeTitleHandler = (newTitle: string) => {
+			props.changeTitle(props.tlId, el.id, newTitle)
+		  }
+		  
 		  return (
 			<li className={el.isDone ? s.finished : ''} key={el.id}>
 			  <article><input type="checkbox" checked={el.isDone}
 							  onChange={() => changeTaskStatusHandler(el.id)}/>
-				<span>{el.title}</span>
+				<EditableSpan value={el.title}
+							  onChange={onChangeTitleHandler}/>
 			  </article>
 			  <button onClick={() => removeTaskHandler(el.id)}>x</button>
 			</li>

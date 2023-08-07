@@ -52,7 +52,6 @@ function App() {
   }
   
   const changeFilter = (tlId: string, filter: FilterValueType) => {
-    // setFilter(filter)
     setTodolists(todolists.map(tl=> tl.id===tlId ? {...tl, filter}:tl))
   }
   
@@ -68,6 +67,14 @@ function App() {
     let id = v1();
     setTodolists([{id: id, title: title, filter: 'All'}, ...todolists]);
     setTasks({[id]:[], ...tasks})
+  }
+  
+  const changeTitle = (tlId: string, id: string, newTitle: string) => {
+   console.log(newTitle)
+    if(newTitle.trim()){
+      setTasks({...tasks, [tlId]: tasks[tlId].map(t=> t.id ===id? {...t, title:newTitle}: t)})
+      
+    }
   }
   
   return (
@@ -93,6 +100,7 @@ function App() {
               addTask={addTask}
               filter={tl.filter}
               changeTaskStatus={changeTaskStatus}
+              changeTitle={changeTitle}
             />
         )
       })}
