@@ -6,29 +6,49 @@ type SpanPropsType = {
 }
 
 export const EditableSpan = (props: SpanPropsType) => {
-  const [title, setTitle]=useState(props.value);
-  const [editMode, setEditMode]=useState(false)
+  const [editMode, setEditMode] = useState(false)
+  const [title, setTitle] = useState(props.value);
   
-  
-  const activateEditMode = () => {
+  const editOn = () => {
 	setEditMode(true)
   }
   
-  const activateViewMode = () => {
-    setEditMode(false)
+  const editOff = () => {
+	setEditMode(false)
 	props.onChange(title)
-	console.log('blured')
   }
   
-  const onChangeTitleHandler = (e:ChangeEvent<HTMLInputElement>) => {
+  const onChangeTitleHandler =(e: ChangeEvent<HTMLInputElement>) => {
 	setTitle(e.currentTarget.value)
   }
   
-  return editMode ?
-    <input value={title} onChange={onChangeTitleHandler} onBlur={activateViewMode} autoFocus={true}/>
- 	:
-	<span onDoubleClick={activateEditMode}>
-	{props.value}
-	</span>
+  return editMode ? <input value={title} onBlur={editOff} onChange={onChangeTitleHandler}/> :
+	<span onDoubleClick={editOn}>{props.value}</span>
+}
+
+// export const EditableSpan = (props: SpanPropsType) => {
+//   const [title, setTitle]=useState(props.value);
+//   const [editMode, setEditMode]=useState(false)
+//
+//
+//   const activateEditMode = () => {
+// 	setEditMode(true)
+//   }
+//
+//   const activateViewMode = () => {
+//     setEditMode(false)
+// 	props.onChange(title)
+//   }
+//
+//   const onChangeTitleHandler = (e:ChangeEvent<HTMLInputElement>) => {
+// 	setTitle(e.currentTarget.value)
+//   }
+//
+//   return editMode ?
+//     <input value={title} onChange={onChangeTitleHandler} onBlur={activateViewMode} autoFocus={true}/>
+//  	:
+// 	<span onDoubleClick={activateEditMode}>
+// 	{props.value}
+// 	</span>
+//};
  
-};
