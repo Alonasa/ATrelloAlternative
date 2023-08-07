@@ -63,6 +63,11 @@ function App() {
     setTasks({...tasks, [tlId]: tasks[tlId].map(t => t.id === id ? {...t, isDone: !t.isDone} : t)})
   }
   
+  const addTodolist = (title: string) => {
+    let id = v1();
+    setTodolists([{id: id, title: title, filter: 'All'}, ...todolists])
+  }
+  
   return (
     <div className="App">
       {todolists.map(tl => {
@@ -75,16 +80,19 @@ function App() {
         }
         
         return (
-          <Todolist
-            key={tl.id}
-            tlId={tl.id}
-            mainTitle={'What to learn'}
-            task={tasksCopy}
-            removeTask={removeTask}
-            changeFilter={changeFilter}
-            addTask={addTask}
-            filter={tl.filter}
-            changeTaskStatus={changeTaskStatus}/>
+          <>
+            <Todolist
+              key={tl.id}
+              tlId={tl.id}
+              mainTitle={'What to learn'}
+              task={tasksCopy}
+              removeTask={removeTask}
+              changeFilter={changeFilter}
+              addTask={addTask}
+              filter={tl.filter}
+              changeTaskStatus={changeTaskStatus}
+            />
+          </>
         )
       })}
     </div>
