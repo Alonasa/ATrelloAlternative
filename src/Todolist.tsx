@@ -2,6 +2,9 @@ import React from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
+import {Button, Checkbox, Input} from '@mui/material';
+import {Clear} from '@mui/icons-material';
+import ListItem from '@mui/material/ListItem'
 
 type PropsType = {
   mainTitle: string
@@ -14,6 +17,7 @@ type PropsType = {
   changeTaskStatus: (tlId: string, id: string) => void
   changeTitle: (tlId: string, id: string, newTitle: string) => void
   changeTodolistTitle: (tlId: string, newTitle: string) => void
+  removeTodolist: (tlId: string) => void
 }
 
 export type taskType = {
@@ -27,7 +31,6 @@ export type TasksType = {
 }
 
 export type FilterValueType = 'All' | 'Active' | 'Completed'
-
 
 export const Todolist = (props: PropsType) => {
   
@@ -48,13 +51,19 @@ export const Todolist = (props: PropsType) => {
   }
   
   const changeTodolistTitleHandler = (newTitle: string) => {
-    props.changeTodolistTitle(props.tlId, newTitle)
+	props.changeTodolistTitle(props.tlId, newTitle)
+  }
+  
+  const removeTodolistHandler = (tlId: string) => {
+    props.removeTodolist(tlId)
   }
   
   return (
-	<div>
-	  <h3>
-		<EditableSpan value={props.mainTitle} onChange={changeTodolistTitleHandler}/>
+	<div style={{margin: '0 10px'}}>
+	  <h3 className={s.title}>
+		<EditableSpan value={props.mainTitle}
+					  onChange={changeTodolistTitleHandler}/>
+		<Button color={'info'} onClick={() => removeTodolistHandler(props.tlId)}><Clear/></Button>
 	  </h3>
 	  <div>
 		<AddItemForm addItem={addTask}/>
@@ -66,30 +75,35 @@ export const Todolist = (props: PropsType) => {
 		  }
 		  
 		  return (
-			<li className={el.isDone ? s.finished : ''} key={el.id}>
-			  <article><input type="checkbox" checked={el.isDone}
+			<ListItem sx={{padding: '0', display: 'flex', justifyContent: 'space-between'}} className={el.isDone ? s.finished : ''} key={el.id}>
+			  <article><Checkbox color={'info'} checked={el.isDone}
 							  onChange={() => changeTaskStatusHandler(el.id)}/>
 				<EditableSpan value={el.title}
 							  onChange={onChangeTitleHandler}/>
 			  </article>
-			  <button onClick={() => removeTaskHandler(el.id)}>x</button>
-			</li>
+			  <Button color={'info'} size={'small'} onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
+			</ListItem>
 		  )
 		})}
 	  </ul>
 	  <div>
-		<button
-		  className={props.filter === 'All' ? `${s.button} ${s.active}` : s.button}
-		  onClick={() => changeFilterHandler('All')}>All
-		</button>
-		<button
-		  className={props.filter === 'Active' ? `${s.button} ${s.active}` : s.button}
+		<Button
+		  size={'small'}
+		  color={props.filter === 'All' ? 'secondary' : 'primary' }
+		  onClick={() => changeFilterHandler('All')} variant={'outlined'}>All
+		</Button>
+		<Button
+		  size={'small'}
+		  variant={'outlined'}
+		  color={props.filter === 'Active' ? 'secondary' : 'primary' }
 		  onClick={() => changeFilterHandler('Active')}>Active
-		</button>
-		<button
-		  className={props.filter === 'Completed' ? `${s.button} ${s.active}` : s.button}
+		</Button>
+		<Button
+		  size={'small'}
+		  variant={'outlined'}
+		  color={props.filter === 'Completed' ? 'secondary' : 'primary' }
 		  onClick={() => changeFilterHandler('Completed')}>Completed
-		</button>
+		</Button>
 	  </div>
 	</div>
   
