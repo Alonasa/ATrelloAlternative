@@ -4,6 +4,7 @@ import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
 import {Button, Checkbox, Input} from '@mui/material';
 import {Clear} from '@mui/icons-material';
+import ListItem from '@mui/material/ListItem'
 
 type PropsType = {
   mainTitle: string
@@ -58,7 +59,7 @@ export const Todolist = (props: PropsType) => {
   }
   
   return (
-	<div>
+	<div style={{margin: '0 10px'}}>
 	  <h3 className={s.title}>
 		<EditableSpan value={props.mainTitle}
 					  onChange={changeTodolistTitleHandler}/>
@@ -74,14 +75,14 @@ export const Todolist = (props: PropsType) => {
 		  }
 		  
 		  return (
-			<li className={el.isDone ? s.finished : ''} key={el.id}>
+			<ListItem sx={{padding: '0', display: 'flex', justifyContent: 'space-between'}} className={el.isDone ? s.finished : ''} key={el.id}>
 			  <article><Checkbox color={'info'} checked={el.isDone}
 							  onChange={() => changeTaskStatusHandler(el.id)}/>
 				<EditableSpan value={el.title}
 							  onChange={onChangeTitleHandler}/>
 			  </article>
 			  <Button color={'info'} size={'small'} onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
-			</li>
+			</ListItem>
 		  )
 		})}
 	  </ul>

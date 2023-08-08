@@ -43,17 +43,8 @@
     list-style: none;
 }
 
-.list li {
-    display: flex;
-    justify-content: space-between;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 35px;
-}
-
 .finished {
     opacity: 0.5;
-    text-decoration: purple line-through;
 }
 
 .title {

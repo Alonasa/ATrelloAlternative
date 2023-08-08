@@ -5,6 +5,8 @@ import {v1} from 'uuid';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
+import Grid from '@mui/material/Grid';
+
 
 type TodolistsType = {
   id: string
@@ -124,33 +126,37 @@ function App() {
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
-		<AddItemForm addItem={addTodolist}/>
-		{todolists.map(tl => {
-		  let tasksCopy = tasks[tl.id];
-		  if (tl.filter === 'Active') {
-			tasksCopy = tasks[tl.id].filter(t => !t.isDone)
-		  }
-		  if (tl.filter === 'Completed') {
-			tasksCopy = tasks[tl.id].filter(t => t.isDone)
-		  }
-		  
-		  return (
-			<Todolist
-			  key={tl.id}
-			  tlId={tl.id}
-			  mainTitle={tl.title}
-			  task={tasksCopy}
-			  removeTask={removeTask}
-			  changeFilter={changeFilter}
-			  addTask={addTask}
-			  filter={tl.filter}
-			  changeTaskStatus={changeTaskStatus}
-			  changeTitle={changeTitle}
-			  changeTodolistTitle={changeTodolistTitle}
-			  removeTodolist={removeTodolist}
-			/>
-		  )
-		})}
+		<Grid container alignContent={'flex-start'}>
+		  <AddItemForm addItem={addTodolist}/>
+		  {todolists.map(tl => {
+			let tasksCopy = tasks[tl.id];
+			if (tl.filter === 'Active') {
+			  tasksCopy = tasks[tl.id].filter(t => !t.isDone)
+			}
+			if (tl.filter === 'Completed') {
+			  tasksCopy = tasks[tl.id].filter(t => t.isDone)
+			}
+			
+			return (
+			  <Grid item spacing={2}>
+				<Todolist
+				  key={tl.id}
+				  tlId={tl.id}
+				  mainTitle={tl.title}
+				  task={tasksCopy}
+				  removeTask={removeTask}
+				  changeFilter={changeFilter}
+				  addTask={addTask}
+				  filter={tl.filter}
+				  changeTaskStatus={changeTaskStatus}
+				  changeTitle={changeTitle}
+				  changeTodolistTitle={changeTodolistTitle}
+				  removeTodolist={removeTodolist}
+				/>
+			  </Grid>
+			)
+		  })}
+		</Grid>
 	  </div>
 	</ThemeProvider>
   );

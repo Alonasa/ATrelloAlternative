@@ -1,7 +1,8 @@
 import React, {FormEvent, KeyboardEvent, useState} from 'react';
 import s from '../Todolist.module.css';
-import {Button} from '@mui/material';
+import {Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import Box from '@mui/material/Box';
 
 type AddItemFormType = {
   addItem: (title: string) => void
@@ -33,12 +34,10 @@ export const AddItemForm = (props: AddItemFormType) => {
   }
   
   return (
-	<div>
-	  <input value={title} onInput={(e) => onInputHandler(e)}
-			 onKeyPress={(e) => onKeyPressHandler(e)}/>
-	  <Button size={'small'} color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
-	  {error &&
-      <p className={s.error}>You can't add empty task</p>}
-	</div>
+	<Box sx={{display:'flex', alignItems: 'flex-start'}}>
+	  <TextField type={'text'} size={'small'} value={title} onInput={onInputHandler}
+			 onKeyPress={onKeyPressHandler} error={error} helperText={error ? 'You can\'t add empty task' : undefined}/>
+	  <Button color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
+	</Box>
   );
 };
