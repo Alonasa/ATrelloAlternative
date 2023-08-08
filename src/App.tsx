@@ -4,7 +4,7 @@ import {FilterValueType, TasksType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
-import {deepPurple, indigo} from '@mui/material/colors';
+import {Menu} from './components/Menu/Menu';
 
 type TodolistsType = {
   id: string
@@ -122,6 +122,7 @@ function App() {
   
   return (
 	<ThemeProvider theme={theme}>
+	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
 		<AddItemForm addItem={addTodolist}/>
 		{todolists.map(tl => {
