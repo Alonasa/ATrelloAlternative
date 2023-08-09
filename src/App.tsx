@@ -127,21 +127,23 @@ function App() {
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
-		<Grid container>
-		  <AddItemForm addItem={addTodolist}/>
-		</Grid>
-		{todolists.map(tl => {
-		  let tasksCopy = tasks[tl.id];
-		  if (tl.filter === 'Active') {
-			tasksCopy = tasks[tl.id].filter(t => !t.isDone)
-		  }
-		  if (tl.filter === 'Completed') {
-			tasksCopy = tasks[tl.id].filter(t => t.isDone)
-		  }
+		<Grid container spacing={2}>
+		  <Grid item xs={12} sm={12} md={4}>
+			<AddItemForm addItem={addTodolist}/>
+		  </Grid>
 		  
-		  return (
-			<Grid container>
-			  <Grid item spacing={2}>
+		  
+		  {todolists.map(tl => {
+			let tasksCopy = tasks[tl.id];
+			if (tl.filter === 'Active') {
+			  tasksCopy = tasks[tl.id].filter(t => !t.isDone)
+			}
+			if (tl.filter === 'Completed') {
+			  tasksCopy = tasks[tl.id].filter(t => t.isDone)
+			}
+			
+			return (
+			  <Grid item xs={12} sm={6} md={4}>
 				<Paper>
 				  <Todolist
 					key={tl.id}
@@ -159,9 +161,9 @@ function App() {
 				  />
 				</Paper>
 			  </Grid>
-			</Grid>
-		  )
-		})}
+			)
+		  })}
+		</Grid>
 	  </div>
 	</ThemeProvider>
   );
