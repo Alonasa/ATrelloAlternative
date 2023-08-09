@@ -6,6 +6,7 @@ import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
 
 
 type TodolistsType = {
@@ -32,20 +33,20 @@ let theme = createTheme({
 })
 
 theme = createTheme(theme, {
- palette: {
-   brown: theme.palette.augmentColor({
-     color: {
-       main: '#d49643',
-     },
-     name: 'brown',
-   }),
-   rose: theme.palette.augmentColor({
-     color: {
-       main: '#bd627f',
-     },
-     name: 'rose'
-   }),
- }
+  palette: {
+	brown: theme.palette.augmentColor({
+	  color: {
+		main: '#d49643',
+	  },
+	  name: 'brown',
+	}),
+	rose: theme.palette.augmentColor({
+	  color: {
+		main: '#bd627f',
+	  },
+	  name: 'rose'
+	}),
+  }
 })
 
 
@@ -126,8 +127,12 @@ function App() {
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
-		<Grid container alignContent={'flex-start'}>
-		  <AddItemForm addItem={addTodolist}/>
+		<Grid container spacing={2}>
+		  <Grid item xs={12} sm={12} md={4}>
+			<AddItemForm addItem={addTodolist}/>
+		  </Grid>
+		  
+		  
 		  {todolists.map(tl => {
 			let tasksCopy = tasks[tl.id];
 			if (tl.filter === 'Active') {
@@ -138,21 +143,23 @@ function App() {
 			}
 			
 			return (
-			  <Grid item spacing={2}>
-				<Todolist
-				  key={tl.id}
-				  tlId={tl.id}
-				  mainTitle={tl.title}
-				  task={tasksCopy}
-				  removeTask={removeTask}
-				  changeFilter={changeFilter}
-				  addTask={addTask}
-				  filter={tl.filter}
-				  changeTaskStatus={changeTaskStatus}
-				  changeTitle={changeTitle}
-				  changeTodolistTitle={changeTodolistTitle}
-				  removeTodolist={removeTodolist}
-				/>
+			  <Grid item xs={12} sm={6} md={4}>
+				<Paper>
+				  <Todolist
+					key={tl.id}
+					tlId={tl.id}
+					mainTitle={tl.title}
+					task={tasksCopy}
+					removeTask={removeTask}
+					changeFilter={changeFilter}
+					addTask={addTask}
+					filter={tl.filter}
+					changeTaskStatus={changeTaskStatus}
+					changeTitle={changeTitle}
+					changeTodolistTitle={changeTodolistTitle}
+					removeTodolist={removeTodolist}
+				  />
+				</Paper>
 			  </Grid>
 			)
 		  })}

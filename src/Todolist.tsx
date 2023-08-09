@@ -59,7 +59,7 @@ export const Todolist = (props: PropsType) => {
   }
   
   return (
-	<div style={{margin: '0 10px'}}>
+	<div className={s.todolist}>
 	  <h3 className={s.title}>
 		<EditableSpan value={props.mainTitle}
 					  onChange={changeTodolistTitleHandler}/>

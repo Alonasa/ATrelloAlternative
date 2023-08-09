@@ -1,5 +1,4 @@
 import React, {FormEvent, KeyboardEvent, useState} from 'react';
-import s from '../Todolist.module.css';
 import {Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
