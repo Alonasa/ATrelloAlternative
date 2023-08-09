@@ -33,10 +33,14 @@ export const AddItemForm = (props: AddItemFormType) => {
   }
   
   return (
-	<Box sx={{display:'flex', alignItems: 'flex-start'}}>
-	  <TextField type={'text'} size={'small'} value={title} onInput={onInputHandler}
-			 onKeyPress={onKeyPressHandler} error={error} helperText={error ? 'You can\'t add empty task' : undefined}/>
-	  <Button color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
+	<Box sx={{display: 'flex', alignItems: 'flex-start'}}>
+	  <TextField type={'text'} size={'small'} value={title}
+				 onInput={onInputHandler}
+				 onKeyPress={onKeyPressHandler} error={error}
+				 helperText={error ? 'You can\'t add empty task' : undefined}/>
+	  <Button
+		sx={{minWidth: 'fit-content'}}
+		color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
 	</Box>
   );
 };
