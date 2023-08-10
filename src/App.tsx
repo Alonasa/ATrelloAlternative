@@ -144,7 +144,7 @@ function App() {
 			
 			return (
 			  <Grid item xs={12} sm={6} md={4}>
-				<Paper elevation={6}>
+				<Paper elevation={6} sx={{height: '100%', position: 'relative'}}>
 				  <Todolist
 					key={tl.id}
 					tlId={tl.id}

@@ -98,7 +98,12 @@ export const Todolist = (props: PropsType) => {
 		  )
 		})}
 	  </ul>
-	  <Grid item sx={{display: 'flex'}}>
+	  <Grid item sx={{
+		display: 'flex',
+		position: 'absolute',
+		bottom: '0',
+		margin: '1em 0'
+	  }}>
 		<Button
 		  size={'small'}
 		  color={props.filter === 'All' ? 'secondary' : 'primary'}
