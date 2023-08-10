@@ -2,9 +2,11 @@ import React from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
-import {Button, Checkbox, Input} from '@mui/material';
+import {Button, Checkbox} from '@mui/material';
 import {Clear} from '@mui/icons-material';
-import ListItem from '@mui/material/ListItem'
+import ListItem from '@mui/material/ListItem';
+import Grid from '@mui/material/Grid';
+
 
 type PropsType = {
   mainTitle: string
@@ -55,7 +57,7 @@ export const Todolist = (props: PropsType) => {
   }
   
   const removeTodolistHandler = (tlId: string) => {
-    props.removeTodolist(tlId)
+	props.removeTodolist(tlId)
   }
   
   return (
@@ -63,7 +65,10 @@ export const Todolist = (props: PropsType) => {
 	  <h3 className={s.title}>
 		<EditableSpan value={props.mainTitle}
 					  onChange={changeTodolistTitleHandler}/>
-		<Button color={'info'} onClick={() => removeTodolistHandler(props.tlId)}><Clear/></Button>
+		<Button
+		  sx={{minWidth: 'fit-content'}}
+		  color={'info'}
+		  onClick={() => removeTodolistHandler(props.tlId)}><Clear/></Button>
 	  </h3>
 	  <div>
 		<AddItemForm addItem={addTask}/>
@@ -75,37 +80,48 @@ export const Todolist = (props: PropsType) => {
 		  }
 		  
 		  return (
-			<ListItem sx={{padding: '0', display: 'flex', justifyContent: 'space-between'}} className={el.isDone ? s.finished : ''} key={el.id}>
+			<ListItem sx={{
+			  padding: '0',
+			  display: 'flex',
+			  justifyContent: 'space-between'
+			}} className={el.isDone ? s.finished : ''} key={el.id}>
 			  <article><Checkbox color={'info'} checked={el.isDone}
-							  onChange={() => changeTaskStatusHandler(el.id)}/>
+								 onChange={() => changeTaskStatusHandler(el.id)}/>
 				<EditableSpan value={el.title}
 							  onChange={onChangeTitleHandler}/>
 			  </article>
-			  <Button color={'info'} size={'small'} onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
+			  <Button
+				sx={{minWidth: 'fit-content'}}
+				color={'info'} size={'small'}
+				onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
 			</ListItem>
 		  )
 		})}
 	  </ul>
-	  <div>
+	  <Grid item sx={{
+		display: 'flex',
+		position: 'absolute',
+		bottom: '0',
+		margin: '1em 0'
+	  }}>
 		<Button
 		  size={'small'}
-		  color={props.filter === 'All' ? 'secondary' : 'primary' }
+		  color={props.filter === 'All' ? 'secondary' : 'primary'}
 		  onClick={() => changeFilterHandler('All')} variant={'outlined'}>All
 		</Button>
 		<Button
 		  size={'small'}
 		  variant={'outlined'}
-		  color={props.filter === 'Active' ? 'secondary' : 'primary' }
+		  color={props.filter === 'Active' ? 'secondary' : 'primary'}
 		  onClick={() => changeFilterHandler('Active')}>Active
 		</Button>
 		<Button
 		  size={'small'}
 		  variant={'outlined'}
-		  color={props.filter === 'Completed' ? 'secondary' : 'primary' }
+		  color={props.filter === 'Completed' ? 'secondary' : 'primary'}
 		  onClick={() => changeFilterHandler('Completed')}>Completed
 		</Button>
-	  </div>
+	  </Grid>
 	</div>
-  
   )
 }

@@ -127,7 +127,7 @@ function App() {
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
-		<Grid container spacing={2}>
+		<Grid container spacing={4}>
 		  <Grid item xs={12} sm={12} md={4}>
 			<AddItemForm addItem={addTodolist}/>
 		  </Grid>
@@ -144,7 +144,7 @@ function App() {
 			
 			return (
 			  <Grid item xs={12} sm={6} md={4}>
-				<Paper>
+				<Paper elevation={6} sx={{height: '100%', position: 'relative'}}>
 				  <Todolist
 					key={tl.id}
 					tlId={tl.id}
