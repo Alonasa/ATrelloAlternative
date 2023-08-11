@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 import {TodolistsType} from '../../App';
 import {
-  AddTodolistAC, ChangeTodolistFilterAC,
+  AddTodolistAC, ChangeTodolistFilterAC, ChangeTodolistTitleAC,
   RemoveTodolistAC,
   TodolistsReducer
 } from './TodolistsReducer';
@@ -41,12 +41,21 @@ test('Selected Todolist should be removed', () => {
 })
 
 test('Filter in selected Todolist should be changed', () => {
-  const endState = TodolistsReducer(startState, ChangeTodolistFilterAC(todolistID1, 'completed'))
+  const endState = TodolistsReducer(startState, ChangeTodolistFilterAC(todolistID1, 'Completed'))
   
   
   expect(endState.length).toBe(2);
   expect(endState[0].id).toBe(todolistID1);
-  expect(endState[0].filter).toBe('completed');
+  expect(endState[0].filter).toBe('Completed');
+})
+
+test('Title of selected todolist should be changed', () => {
+  const endState = TodolistsReducer(startState, ChangeTodolistTitleAC(todolistID1, 'NewTitle'))
+  
+  
+  expect(endState.length).toBe(2);
+  expect(endState[0].id).toBe(todolistID1);
+  expect(endState[0].title).toBe('NewTitle');
 })
 
 
