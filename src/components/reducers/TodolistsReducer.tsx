@@ -11,14 +11,19 @@ export const TodolistsReducer = (state: TodolistsType[], action: ActionTypes) =>
         filter: 'All'
       }, ...state]
     }
+    case 'REMOVE-TODOLIST': {
+      return state.filter(tl=> tl.id!== action.payload.tlId)
+    }
     default:
       return state
   }
 }
 
-export type ActionTypes = AddTodolistACType
+export type ActionTypes = AddTodolistACType | RemoveTodolistACType
 
 type AddTodolistACType = ReturnType<typeof AddTodolistAC>
+type RemoveTodolistACType = ReturnType<typeof RemoveTodolistAC>
+
 
 export const AddTodolistAC = (tlId: string, title: string) => {
   return {
@@ -26,5 +31,15 @@ export const AddTodolistAC = (tlId: string, title: string) => {
     payload: {
       tlId, title
     }
+  } as const
+}
+
+
+export const RemoveTodolistAC = (tlId: string) => {
+  return {
+   type: 'REMOVE-TODOLIST',
+   payload: {
+     tlId
+   }
   } as const
 }
