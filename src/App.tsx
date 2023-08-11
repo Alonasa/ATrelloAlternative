@@ -128,8 +128,8 @@ function App() {
 	  <Menu title={'Todolists'}/>
 	  <div className="App" color={'info'}>
 		<Grid container spacing={4}>
-		  <Grid item xs={12} sm={12} md={4}>
-			<AddItemForm addItem={addTodolist}/>
+		  <Grid item xs={12} sm={12} md={12}>
+			  <AddItemForm addItem={addTodolist}/>
 		  </Grid>
 		  
 		  
