@@ -2,6 +2,7 @@ import React, {FormEvent, KeyboardEvent, useState} from 'react';
 import {Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 type AddItemFormType = {
   addItem: (title: string) => void
@@ -33,10 +34,11 @@ export const AddItemForm = (props: AddItemFormType) => {
   }
   
   return (
-	<Box sx={{display: 'flex', alignItems: 'flex-start'}}>
-	  <TextField type={'text'} size={'small'} value={title}
+	<Box sx={{display: 'flex', alignItems: 'flex-start', maxWidth: '500px'}}>
+	  <TextField type={'text'} size={'small'} sx={{width: '90%'}} value={title}
 				 onInput={onInputHandler}
-				 onKeyPress={onKeyPressHandler} error={error}
+				 onKeyPress={onKeyPressHandler}
+				 error={error}
 				 helperText={error ? 'You can\'t add empty task' : undefined}/>
 	  <Button
 		sx={{minWidth: 'fit-content'}}

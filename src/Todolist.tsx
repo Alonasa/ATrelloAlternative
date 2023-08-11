@@ -80,18 +80,19 @@ export const Todolist = (props: PropsType) => {
 		  }
 		  
 		  return (
-			<ListItem sx={{
+			<ListItem
+			  sx={{
 			  padding: '0',
 			  display: 'flex',
-			  justifyContent: 'space-between'
+				width: '100%'
 			}} className={el.isDone ? s.finished : ''} key={el.id}>
-			  <article><Checkbox color={'info'} checked={el.isDone}
+			  <Checkbox color={'info'} checked={el.isDone}
 								 onChange={() => changeTaskStatusHandler(el.id)}/>
 				<EditableSpan value={el.title}
 							  onChange={onChangeTitleHandler}/>
-			  </article>
+			  
 			  <Button
-				sx={{minWidth: 'fit-content'}}
+				sx={{minWidth: 'fit-content', marginLeft: 'auto'}}
 				color={'info'} size={'small'}
 				onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
 			</ListItem>
@@ -99,23 +100,30 @@ export const Todolist = (props: PropsType) => {
 		})}
 	  </ul>
 	  <Grid item sx={{
+		width: 'calc(100% - 2em)',
 		display: 'flex',
 		position: 'absolute',
 		bottom: '0',
-		margin: '1em 0'
+		margin: '1em 0',
 	  }}>
 		<Button
+		  sx={{flexGrow: 1, wordWrap: 'break-word',
+		overflow: 'hidden', minWidth: 'fit-content'}}
 		  size={'small'}
 		  color={props.filter === 'All' ? 'secondary' : 'primary'}
 		  onClick={() => changeFilterHandler('All')} variant={'outlined'}>All
 		</Button>
 		<Button
+		  sx={{flexGrow: 1, wordWrap: 'break-word',
+		overflow: 'hidden'}}
 		  size={'small'}
 		  variant={'outlined'}
 		  color={props.filter === 'Active' ? 'secondary' : 'primary'}
 		  onClick={() => changeFilterHandler('Active')}>Active
 		</Button>
 		<Button
+		  sx={{flexGrow: 1, wordWrap: 'break-word',
+		overflow: 'hidden'}}
 		  size={'small'}
 		  variant={'outlined'}
 		  color={props.filter === 'Completed' ? 'secondary' : 'primary'}
