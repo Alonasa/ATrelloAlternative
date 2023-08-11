@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
 
-type TodolistsType = {
+export type TodolistsType = {
   id: string
   title: string
   filter: FilterValueType
