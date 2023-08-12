@@ -1,6 +1,11 @@
 import {v1} from 'uuid';
 import {TasksType} from '../../../Todolist';
-import {AddTaskAC, RemoveTaskAC, TasksReducer} from './TasksReducer';
+import {
+  AddTaskAC,
+  ChangeTaskStatusAC,
+  RemoveTaskAC,
+  TasksReducer
+} from './TasksReducer';
 
 let todolistID1: string;
 let todolistID2: string;
@@ -58,4 +63,15 @@ test('Task should be removed from correct todolist', () => {
 		{id: '5', title: 'GraphQL2', isDone: false},
 	  ],
 	})
+})
+
+
+test('Correct task should change it\'s status', ()=> {
+  const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3'))
+  
+  
+  expect(startState[todolistID2].length).toBe(5)
+  expect(endState[todolistID2].length).toBe(5)
+  expect(startState[todolistID2][2].isDone).toBe(false);
+  expect(endState[todolistID2][2].isDone).toBe(true);
 })
