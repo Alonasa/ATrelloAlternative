@@ -1,6 +1,6 @@
 import React from 'react';
-import {TodolistsType} from '../../App';
-import {FilterValueType} from '../../Todolist';
+import {TodolistsType} from '../../../App';
+import {FilterValueType} from '../../../Todolist';
 
 
 export const TodolistsReducer = (state: TodolistsType[], action: ActionTypes) => {
