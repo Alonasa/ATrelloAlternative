@@ -20,11 +20,22 @@ export const TasksReducer = (state: TasksType, action: ActionsType) => {
 	  }
 	}
 	case 'CHANGE-TASK-STATUS': {
-	  return {...state,
+	  return {
+		...state,
 		[action.payload.tlId]: [...state[action.payload.tlId].map(t => t.id === action.payload.id ? {
 		  ...t,
 		  isDone: !t.isDone
 		} : t)]
+	  }
+	}
+	case 'CHANGE-TASK-TITLE': {
+	  return {
+		...state,
+		[action.payload.tlId]: state[action.payload.tlId].map(t =>
+          t.id === action.payload.id ? {
+		  ...t,
+		  title: action.payload.newTitle
+		} : t)
 	  }
 	}
 	
@@ -34,12 +45,16 @@ export const TasksReducer = (state: TasksType, action: ActionsType) => {
   
 }
 
-type ActionsType = AddTaskACType | RemoveTaskACType | ChangeTaskStatusACType
+type ActionsType =
+  AddTaskACType
+  | RemoveTaskACType
+  | ChangeTaskStatusACType
+  | ChangeTaskTitleACType
 
 type AddTaskACType = ReturnType<typeof AddTaskAC>
 type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
 type ChangeTaskStatusACType = ReturnType<typeof ChangeTaskStatusAC>
-
+type ChangeTaskTitleACType = ReturnType<typeof ChangeTaskTitleAC>
 
 export const AddTaskAC = (tlId: string, title: string) => {
   return {
@@ -64,6 +79,15 @@ export const ChangeTaskStatusAC = (tlId: string, id: string) => {
 	type: 'CHANGE-TASK-STATUS',
 	payload: {
 	  tlId, id
+	}
+  } as const
+}
+
+export const ChangeTaskTitleAC = (tlId: string, id: string, newTitle: string) => {
+  return {
+	type: 'CHANGE-TASK-TITLE',
+	payload: {
+	  tlId, id, newTitle
 	}
   } as const
 }

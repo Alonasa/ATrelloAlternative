@@ -2,7 +2,7 @@ import {v1} from 'uuid';
 import {TasksType} from '../../../Todolist';
 import {
   AddTaskAC,
-  ChangeTaskStatusAC,
+  ChangeTaskStatusAC, ChangeTaskTitleAC,
   RemoveTaskAC,
   TasksReducer
 } from './TasksReducer';
@@ -69,9 +69,20 @@ test('Task should be removed from correct todolist', () => {
 test('Correct task should change it\'s status', ()=> {
   const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3'))
   
-  
   expect(startState[todolistID2].length).toBe(5)
   expect(endState[todolistID2].length).toBe(5)
   expect(startState[todolistID2][2].isDone).toBe(false);
   expect(endState[todolistID2][2].isDone).toBe(true);
+})
+
+
+test('Correct task should change it\'s title', ()=> {
+  const newTitle = 'I am new title';
+  const endState = TasksReducer(startState, ChangeTaskTitleAC(todolistID2, '1', newTitle))
+  
+  expect(startState[todolistID2].length).toBe(5)
+  expect(endState[todolistID2].length).toBe(5)
+  expect(startState[todolistID2][0].title).toBe('HTML&CSS2');
+  expect(endState[todolistID2][0].title).toBe(newTitle);
+  expect(endState[todolistID1][0].title).not.toEqual(endState[todolistID2][0].title)
 })
