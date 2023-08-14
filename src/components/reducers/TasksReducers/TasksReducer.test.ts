@@ -6,7 +6,10 @@ import {
   RemoveTaskAC,
   TasksReducer
 } from './TasksReducer';
-import {AddTodolistAC} from '../TodolistsReducer/TodolistsReducer';
+import {
+  AddTodolistAC,
+  RemoveTodolistAC
+} from '../TodolistsReducer/TodolistsReducer';
 
 let todolistID1: string;
 let todolistID2: string;
@@ -100,4 +103,14 @@ test('Array of tasks in New todolist can\'t be empty',()=>{
   
   expect(keys.length).toBe(3);
   expect(endState[newKey]).toEqual([])
+})
+
+test('property with todolistId should be deleted', () => {
+  const endState = TasksReducer(startState, RemoveTodolistAC(todolistID2))
+  
+  
+  const keys = Object.keys(endState)
+  
+  expect(keys.length).toBe(1)
+  expect(endState[todolistID2]).not.toBeDefined()
 })
