@@ -35,6 +35,7 @@ test('New todolist should be added', () => {
 
 test('Selected Todolist should be removed', () => {
   const endState = TodolistsReducer(startState, RemoveTodolistAC(todolistID1))
+  
   expect(endState.length).toBe(1);
   expect(endState[0].id).toBe(todolistID2);
   expect(endState[0].title).toBe('What to buy');
@@ -43,7 +44,6 @@ test('Selected Todolist should be removed', () => {
 test('Filter in selected Todolist should be changed', () => {
   const endState = TodolistsReducer(startState, ChangeTodolistFilterAC(todolistID1, 'Completed'))
   
-  
   expect(endState.length).toBe(2);
   expect(endState[0].id).toBe(todolistID1);
   expect(endState[0].filter).toBe('Completed');
@@ -51,7 +51,6 @@ test('Filter in selected Todolist should be changed', () => {
 
 test('Title of selected todolist should be changed', () => {
   const endState = TodolistsReducer(startState, ChangeTodolistTitleAC(todolistID1, 'NewTitle'))
-  
   
   expect(endState.length).toBe(2);
   expect(endState[0].id).toBe(todolistID1);
