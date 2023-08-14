@@ -6,6 +6,7 @@ import {
   RemoveTaskAC,
   TasksReducer
 } from './TasksReducer';
+import {AddTodolistAC} from '../TodolistsReducer/TodolistsReducer';
 
 let todolistID1: string;
 let todolistID2: string;
@@ -86,4 +87,17 @@ test('Correct task should change it\'s title', ()=> {
   expect(startState[todolistID2][0].title).toBe('HTML&CSS2');
   expect(endState[todolistID2][0].title).toBe(newTitle);
   expect(endState[todolistID1][0].title).not.toEqual(endState[todolistID2][0].title)
+})
+
+test('Array of tasks in New todolist can\'t be empty',()=>{
+  const endState = TasksReducer(startState, AddTodolistAC('New Title'))
+  
+  const keys = Object.keys(endState);
+  const newKey = keys.find(k=> k !== todolistID1 && k !==todolistID2);
+  if(!newKey){
+    throw Error("New key should be added")
+  }
+  
+  expect(keys.length).toBe(3);
+  expect(endState[newKey]).toEqual([])
 })
