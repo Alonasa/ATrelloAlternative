@@ -6,6 +6,10 @@ import {
   RemoveTaskAC,
   TasksReducer
 } from './TasksReducer';
+import {
+  AddTodolistAC,
+  RemoveTodolistAC
+} from '../TodolistsReducer/TodolistsReducer';
 
 let todolistID1: string;
 let todolistID2: string;
@@ -73,6 +77,7 @@ test('Correct task should change it\'s status', ()=> {
   expect(endState[todolistID2].length).toBe(5)
   expect(startState[todolistID2][2].isDone).toBe(false);
   expect(endState[todolistID2][2].isDone).toBe(true);
+  expect(endState[todolistID1][2].isDone).toBe(false);
 })
 
 
@@ -85,4 +90,27 @@ test('Correct task should change it\'s title', ()=> {
   expect(startState[todolistID2][0].title).toBe('HTML&CSS2');
   expect(endState[todolistID2][0].title).toBe(newTitle);
   expect(endState[todolistID1][0].title).not.toEqual(endState[todolistID2][0].title)
+})
+
+test('Array of tasks in New todolist can\'t be empty',()=>{
+  const endState = TasksReducer(startState, AddTodolistAC('New Title'))
+  
+  const keys = Object.keys(endState);
+  const newKey = keys.find(k=> k !== todolistID1 && k !==todolistID2);
+  if(!newKey){
+    throw Error("New key should be added")
+  }
+  
+  expect(keys.length).toBe(3);
+  expect(endState[newKey]).toEqual([])
+})
+
+test('property with todolistId should be deleted', () => {
+  const endState = TasksReducer(startState, RemoveTodolistAC(todolistID2))
+  
+  
+  const keys = Object.keys(endState)
+  
+  expect(keys.length).toBe(1)
+  expect(endState[todolistID2]).not.toBeDefined()
 })
