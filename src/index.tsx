@@ -4,7 +4,7 @@ import React from 'react'; //We are starting
 import ReactDOM from 'react-dom/client'; //Framework for
 // building web applications
 import './index.css'; // import styles
-import App from './App'; // Import App component
+import AppWithReducesrs from './AppWithReducesrs'; // Import App component
 
 // React DOM will render App element inside element with id root
 const root = ReactDOM.createRoot(
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <AppWithReducesrs/>
   </React.StrictMode>
 );
 
