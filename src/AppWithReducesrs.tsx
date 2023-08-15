@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
-import {FilterValueType, TasksType, Todolist} from './Todolist';
+import {FilterValueType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import {TodolistsReducer} from './components/reducers/TodolistsReducer/TodolistsReducer';
+import {TasksReducer} from './components/reducers/TasksReducers/TasksReducer';
 
 
 export type TodolistsType = {
@@ -54,12 +56,12 @@ function AppWithReducers() {
   let todolistID1 = v1();
   let todolistID2 = v1();
   
-  let [todolists, setTodolists] = useState<Array<TodolistsType>>([
+  let [todolists, dispatchToTodolists] = useReducer(TodolistsReducer, [
 	{id: todolistID1, title: 'What to learn', filter: 'All'},
 	{id: todolistID2, title: 'What to buy', filter: 'All'},
   ])
   
-  let [tasks, setTasks] = useState<TasksType>({
+  let [tasks, dispatchToTasks] = useReducer(TasksReducer, {
 	[todolistID1]: [
 	  {id: v1(), title: 'HTML&CSS', isDone: true},
 	  {id: v1(), title: 'JS', isDone: true},
@@ -129,7 +131,7 @@ function AppWithReducers() {
 	  <div className="App" color={'info'}>
 		<Grid container spacing={4}>
 		  <Grid item xs={12} sm={12} md={12}>
-			  <AddItemForm addItem={addTodolist}/>
+			<AddItemForm addItem={addTodolist}/>
 		  </Grid>
 		  
 		  
@@ -144,7 +146,8 @@ function AppWithReducers() {
 			
 			return (
 			  <Grid item xs={12} sm={6} md={4}>
-				<Paper elevation={6} sx={{height: '100%', position: 'relative'}}>
+				<Paper elevation={6}
+					   sx={{height: '100%', position: 'relative'}}>
 				  <Todolist
 					key={tl.id}
 					tlId={tl.id}
