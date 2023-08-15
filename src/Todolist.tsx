@@ -7,7 +7,6 @@ import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
 import Grid from '@mui/material/Grid';
 
-
 type PropsType = {
   mainTitle: string
   tlId: string
@@ -30,6 +29,12 @@ export type taskType = {
 
 export type TasksType = {
   [key: string]: Array<taskType>
+}
+
+export type TodolistsType = {
+  id: string
+  title: string
+  filter: FilterValueType
 }
 
 export type FilterValueType = 'All' | 'Active' | 'Completed'

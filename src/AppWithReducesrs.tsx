@@ -15,18 +15,12 @@ import {
   TodolistsReducer
 } from './components/reducers/TodolistsReducer/TodolistsReducer';
 import {
-  AddTaskAC, ChangeTaskStatusAC,
+  AddTaskAC,
+  ChangeTaskStatusAC,
   ChangeTaskTitleAC,
   RemoveTaskAC,
   TasksReducer
 } from './components/reducers/TasksReducers/TasksReducer';
-
-
-export type TodolistsType = {
-  id: string
-  title: string
-  filter: FilterValueType
-}
 
 let theme = createTheme({
   palette: {
@@ -107,7 +101,6 @@ function AppWithReducers() {
   }
   
   const addTodolist = (title: string) => {
-	let id = v1();
 	let action = AddTodolistAC(title);
 	dispatchToTodolists(action);
 	dispatchToTasks(action);
@@ -115,7 +108,7 @@ function AppWithReducers() {
   
   const changeTitle = (tlId: string, id: string, newTitle: string) => {
 	if (newTitle.trim()) {
-	  dispatchToTasks(ChangeTaskTitleAC(tlId,id,newTitle))
+	  dispatchToTasks(ChangeTaskTitleAC(tlId, id, newTitle))
 	}
   }
   
@@ -124,8 +117,9 @@ function AppWithReducers() {
   }
   
   const removeTodolist = (tlId: string) => {
-	dispatchToTodolists(RemoveTodolistAC(tlId))
-	delete tasks[tlId]
+    let action = RemoveTodolistAC(tlId);
+	dispatchToTodolists(action);
+	dispatchToTasks(action);
   }
   
   return (
