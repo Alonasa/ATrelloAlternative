@@ -1,6 +1,5 @@
 import React from 'react';
-import {TodolistsType} from '../../../App';
-import {FilterValueType} from '../../../Todolist';
+import {FilterValueType, TodolistsType} from '../../../Todolist';
 import {v1} from 'uuid';
 
 
@@ -44,11 +43,13 @@ export type RemoveTodolistACType = ReturnType<typeof RemoveTodolistAC>
 type ChangeTodolistFilterACType = ReturnType<typeof ChangeTodolistFilterAC>
 type ChangeTodolistTitleACType = ReturnType<typeof ChangeTodolistTitleAC>
 
+let newID = v1();
+
 export const AddTodolistAC = (title: string) => {
   return {
     type: 'ADD-TODOLIST',
     payload: {
-      tlId: v1(), title
+      tlId: newID, title
     }
   } as const
 }
