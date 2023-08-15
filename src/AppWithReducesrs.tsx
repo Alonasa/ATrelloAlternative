@@ -7,7 +7,10 @@ import {createTheme, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {TodolistsReducer} from './components/reducers/TodolistsReducer/TodolistsReducer';
+import {
+  ChangeTodolistFilterAC,
+  TodolistsReducer
+} from './components/reducers/TodolistsReducer/TodolistsReducer';
 import {TasksReducer} from './components/reducers/TasksReducers/TasksReducer';
 
 
@@ -84,7 +87,7 @@ function AppWithReducers() {
   }
   
   const changeFilter = (tlId: string, filter: FilterValueType) => {
-	setTodolists(todolists.map(tl => tl.id === tlId ? {...tl, filter} : tl))
+	dispatchToTodolists(ChangeTodolistFilterAC(tlId,filter));
   }
   
   const addTask = (tlId: string, title: string) => {
