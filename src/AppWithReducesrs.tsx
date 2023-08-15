@@ -9,11 +9,15 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {
   AddTodolistAC,
-  ChangeTodolistFilterAC, ChangeTodolistTitleAC, RemoveTodolistAC,
+  ChangeTodolistFilterAC,
+  ChangeTodolistTitleAC,
+  RemoveTodolistAC,
   TodolistsReducer
 } from './components/reducers/TodolistsReducer/TodolistsReducer';
 import {
-  AddTaskAC,
+  AddTaskAC, ChangeTaskStatusAC,
+  ChangeTaskTitleAC,
+  RemoveTaskAC,
   TasksReducer
 } from './components/reducers/TasksReducers/TasksReducer';
 
@@ -87,25 +91,19 @@ function AppWithReducers() {
   
   
   const removeTask = (tlId: string, id: string) => {
-	//setTasks({...tasks, [tlId]: [...tasks[tlId].filter(t => t.id !== id)]})
+	dispatchToTasks(RemoveTaskAC(tlId, id));
   }
   
   const changeFilter = (tlId: string, filter: FilterValueType) => {
-	dispatchToTodolists(ChangeTodolistFilterAC(tlId,filter));
+	dispatchToTodolists(ChangeTodolistFilterAC(tlId, filter));
   }
   
   const addTask = (tlId: string, title: string) => {
-	// setTasks({
-	//   ...tasks,
-	//   [tlId]: [{id: v1(), title: title, isDone: false}, ...tasks[tlId]]
-	// })
+	dispatchToTasks(AddTaskAC(tlId, title))
   }
   
   const changeTaskStatus = (tlId: string, id: string) => {
-	// setTasks({
-	//   ...tasks,
-	//   [tlId]: tasks[tlId].map(t => t.id === id ? {...t, isDone: !t.isDone} : t)
-	// })
+	dispatchToTasks(ChangeTaskStatusAC(tlId, id))
   }
   
   const addTodolist = (title: string) => {
@@ -117,19 +115,16 @@ function AppWithReducers() {
   
   const changeTitle = (tlId: string, id: string, newTitle: string) => {
 	if (newTitle.trim()) {
-	  // setTasks({
-		// ...tasks,
-		// [tlId]: tasks[tlId].map(t => t.id === id ? {...t, title: newTitle} : t)
-	  // })
+	  dispatchToTasks(ChangeTaskTitleAC(tlId,id,newTitle))
 	}
   }
   
   const changeTodolistTitle = (tlId: string, newTitle: string) => {
-	dispatchToTodolists(ChangeTodolistTitleAC(tlId,newTitle))
+	dispatchToTodolists(ChangeTodolistTitleAC(tlId, newTitle))
   }
   
   const removeTodolist = (tlId: string) => {
-    dispatchToTodolists(RemoveTodolistAC(tlId))
+	dispatchToTodolists(RemoveTodolistAC(tlId))
 	delete tasks[tlId]
   }
   
