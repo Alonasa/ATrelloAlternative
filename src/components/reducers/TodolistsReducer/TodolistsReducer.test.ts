@@ -24,13 +24,10 @@ beforeEach(() => {
 
 
 test('New todolist should be added', () => {
-  let newTlId = v1();
-  const endState = TodolistsReducer(startState, AddTodolistAC(newTlId, 'New Title'))
+  const endState = TodolistsReducer(startState, AddTodolistAC('New Title'))
   
   expect(endState.length).toBe(3);
   expect(endState[0].title).toBe('New Title');
-  expect(endState[0].id).toBe(newTlId);
-  
 })
 
 test('Selected Todolist should be removed', () => {
