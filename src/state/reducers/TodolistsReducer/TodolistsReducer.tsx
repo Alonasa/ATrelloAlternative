@@ -2,8 +2,9 @@ import React from 'react';
 import {FilterValueType, TodolistsType} from '../../../Todolist';
 import {v1} from 'uuid';
 
+const initialState:Array<TodolistsType> = []
 
-export const TodolistsReducer = (state: Array<TodolistsType>, action: ActionTypes): Array<TodolistsType> => {
+export const TodolistsReducer = (state: Array<TodolistsType> = initialState, action: ActionTypes): Array<TodolistsType> => {
   switch (action.type) {
     case 'ADD-TODOLIST': {
       return [{
