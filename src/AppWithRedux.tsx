@@ -21,6 +21,9 @@ import {
   RemoveTaskAC,
   TasksReducer
 } from './state/reducers/TasksReducers/TasksReducer';
+import {useSelector} from 'react-redux';
+import { AppRootStateType } from './state/store';
+import { TodolistsType } from './App';
 
 let theme = createTheme({
   palette: {
@@ -61,27 +64,10 @@ function AppWithRedux() {
   let todolistID1 = v1();
   let todolistID2 = v1();
   
-  let [todolists, dispatchToTodolists] = useReducer(TodolistsReducer, [
-	{id: todolistID1, title: 'What to learn', filter: 'All'},
-	{id: todolistID2, title: 'What to buy', filter: 'All'},
-  ])
+  let todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists);
   
-  let [tasks, dispatchToTasks] = useReducer(TasksReducer, {
-	[todolistID1]: [
-	  {id: v1(), title: 'HTML&CSS', isDone: true},
-	  {id: v1(), title: 'JS', isDone: true},
-	  {id: v1(), title: 'ReactJS', isDone: false},
-	  {id: v1(), title: 'Rest API', isDone: false},
-	  {id: v1(), title: 'GraphQL', isDone: false},
-	],
-	[todolistID2]: [
-	  {id: v1(), title: 'HTML&CSS2', isDone: true},
-	  {id: v1(), title: 'JS2', isDone: true},
-	  {id: v1(), title: 'ReactJS2', isDone: false},
-	  {id: v1(), title: 'Rest API2', isDone: false},
-	  {id: v1(), title: 'GraphQL2', isDone: false},
-	]
-  });
+  let tasks = useSelector<AppRootStateType, TodolistsType>(state => state.tasks)
+  
   
   
   const removeTask = (tlId: string, id: string) => {
