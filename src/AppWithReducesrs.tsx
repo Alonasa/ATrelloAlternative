@@ -13,14 +13,14 @@ import {
   ChangeTodolistTitleAC,
   RemoveTodolistAC,
   TodolistsReducer
-} from './components/reducers/TodolistsReducer/TodolistsReducer';
+} from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {
   AddTaskAC,
   ChangeTaskStatusAC,
   ChangeTaskTitleAC,
   RemoveTaskAC,
   TasksReducer
-} from './components/reducers/TasksReducers/TasksReducer';
+} from './state/reducers/TasksReducers/TasksReducer';
 
 let theme = createTheme({
   palette: {
