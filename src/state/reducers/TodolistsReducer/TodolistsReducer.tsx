@@ -47,13 +47,12 @@ export type RemoveTodolistACType = ReturnType<typeof RemoveTodolistAC>
 type ChangeTodolistFilterACType = ReturnType<typeof ChangeTodolistFilterAC>
 type ChangeTodolistTitleACType = ReturnType<typeof ChangeTodolistTitleAC>
 
-let newID = v1();
 
 export const AddTodolistAC = (title: string) => {
   return {
     type: 'ADD-TODOLIST',
     payload: {
-      tlId: newID, title
+      tlId: v1(), title
     }
   } as const
 }

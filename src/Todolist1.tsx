@@ -42,7 +42,7 @@ export const Todolist1 = (props: PropsType) => {
   const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
   const {id:tlId, title, filter} = todolist;
   
-  let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
+ let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
   
   
   const dispatch = useDispatch();
