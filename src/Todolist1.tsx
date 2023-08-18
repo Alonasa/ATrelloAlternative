@@ -24,6 +24,10 @@ type PropsType = {
   tlId: string
 }
 
+export type TasksType = {
+  [key: string]: Array<taskType>
+}
+
 export type taskType = {
   id: string
   title: string

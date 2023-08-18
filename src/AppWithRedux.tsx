@@ -9,7 +9,7 @@ import {AddTodolistAC} from './state/reducers/TodolistsReducer/TodolistsReducer'
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {Todolist1} from './Todolist1';
-import {FilterValueType} from './Todolist';
+import {FilterValueType} from './Todolist1';
 
 let theme = createTheme({
   palette: {

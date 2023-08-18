@@ -1,4 +1,4 @@
-import {TasksType} from '../../../Todolist';
+import {TasksType} from '../../../Todolist1';
 import {v1} from 'uuid';
 import {
   AddTodolistACType,
