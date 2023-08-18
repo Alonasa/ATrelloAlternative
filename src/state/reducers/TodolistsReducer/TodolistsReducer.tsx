@@ -1,5 +1,5 @@
 import React from 'react';
-import {FilterValueType, TodolistsType} from '../../../Todolist';
+import {FilterValueType, TodolistsType} from '../../../Todolist1';
 import {v1} from 'uuid';
 
 const initialState:Array<TodolistsType> = [
