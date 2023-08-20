@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
@@ -57,10 +57,10 @@ function AppWithRedux() {
   
   const dispatch = useDispatch();
   
-  const addTodolist = (title: string) => {
+  const addTodolist = useCallback((title: string) => {
 	let action = AddTodolistAC(title);
 	dispatch(action);
-  }
+  }, [dispatch])
   
   
   return (

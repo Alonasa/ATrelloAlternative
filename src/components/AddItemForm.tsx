@@ -23,7 +23,9 @@ export const AddItemForm = memo((props: AddItemFormType) => {
   }
   
   const onInputHandler = (value: string) => {
-	setError(false)
+	if (error) {
+	  setError(false)
+	}
 	setTitle(value)
   }
   
