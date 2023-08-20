@@ -53,9 +53,9 @@ export const Todolist1 = (props: PropsType) => {
   
   const dispatch = useDispatch();
   
-  const changeFilterHandler = useCallback((filter: FilterValueType) => {
+  const changeFilterHandler = (filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
-  }, [dispatch])
+  }
   
   const changeTaskStatusHandler = (id: string) => {
 	dispatch(ChangeTaskStatusAC(tlId, id))

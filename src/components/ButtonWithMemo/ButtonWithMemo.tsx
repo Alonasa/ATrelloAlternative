@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Button} from '@mui/material';
 
 
@@ -11,7 +11,7 @@ type ButtonWithMemoPropsType = {
 }
 
 
-export const ButtonWithMemo = (props: ButtonWithMemoPropsType) => {
+export const ButtonWithMemo = memo((props: ButtonWithMemoPropsType) => {
   return <Button
 	sx={{
 	  flexGrow: 1, wordWrap: 'break-word',
@@ -22,4 +22,4 @@ export const ButtonWithMemo = (props: ButtonWithMemoPropsType) => {
 	color={props.color}
 	onClick={props.onClick}>{props.title}
   </Button>
-}
+})
