@@ -55,9 +55,7 @@ export type TodolistsType = {
 function AppWithRedux() {
   let todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists);
   
-  
   const dispatch = useDispatch();
-  
   
   const addTodolist = (title: string) => {
 	let action = AddTodolistAC(title);
