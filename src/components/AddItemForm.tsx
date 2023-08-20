@@ -1,4 +1,4 @@
-import React, {KeyboardEvent, useState} from 'react';
+import React, {KeyboardEvent, memo, useState} from 'react';
 import {Button, TextField} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
@@ -7,7 +7,8 @@ type AddItemFormType = {
   addItem: (title: string) => void
 }
 
-export const AddItemForm = (props: AddItemFormType) => {
+export const AddItemForm = memo((props: AddItemFormType) => {
+  console.log('ADD ITEM')
   let [title, setTitle] = useState<string>('');
   let [error, setError] = useState<boolean>(false);
   
@@ -22,7 +23,9 @@ export const AddItemForm = (props: AddItemFormType) => {
   }
   
   const onInputHandler = (value: string) => {
-	setError(false)
+	if (error) {
+	  setError(false)
+	}
 	setTitle(value)
   }
   
@@ -45,4 +48,4 @@ export const AddItemForm = (props: AddItemFormType) => {
 		color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
 	</Box>
   );
-};
+});

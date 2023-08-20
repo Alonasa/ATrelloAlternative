@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
@@ -43,6 +43,7 @@ export type TodolistsType = {
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
 export const Todolist1 = (props: PropsType) => {
+  console.log('TODOLIST')
   const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
   const {id:tlId, title, filter} = todolist;
   
@@ -63,9 +64,9 @@ export const Todolist1 = (props: PropsType) => {
 	dispatch(RemoveTaskAC(tlId, id))
   }
   
-  const addTask = (title: string) => {
+  const addTask = useCallback((title: string) => {
 	dispatch(AddTaskAC(tlId, title))
-  }
+  }, [dispatch])
   
   const changeTodolistTitleHandler = (newTitle: string) => {
 	dispatch(ChangeTodolistTitleAC(tlId, newTitle))
