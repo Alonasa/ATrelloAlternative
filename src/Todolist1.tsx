@@ -19,6 +19,7 @@ import {
   ChangeTaskTitleAC,
   RemoveTaskAC
 } from './state/reducers/TasksReducers/TasksReducer';
+import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
 
 type PropsType = {
   tlId: string
@@ -45,16 +46,16 @@ export type FilterValueType = 'All' | 'Active' | 'Completed'
 export const Todolist1 = (props: PropsType) => {
   console.log('TODOLIST')
   const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
-  const {id:tlId, title, filter} = todolist;
+  const {id: tlId, title, filter} = todolist;
   
- let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
+  let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
   
   
   const dispatch = useDispatch();
   
-  const changeFilterHandler = (filter: FilterValueType) => {
+  const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
-  }
+  }, [dispatch])
   
   const changeTaskStatusHandler = (id: string) => {
 	dispatch(ChangeTaskStatusAC(tlId, id))
@@ -130,35 +131,24 @@ export const Todolist1 = (props: PropsType) => {
 		bottom: '0',
 		margin: '1em 0',
 	  }}>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden', minWidth: 'fit-content'
-		  }}
-		  size={'small'}
+		<ButtonWithMemo
+		  title={'All'}
 		  color={filter === 'All' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('All')} variant={'outlined'}>All
-		</Button>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden'
-		  }}
-		  size={'small'}
-		  variant={'outlined'}
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('All')}
+		/>
+		<ButtonWithMemo
+		  title={'Active'}
 		  color={filter === 'Active' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('Active')}>Active
-		</Button>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden'
-		  }}
-		  size={'small'}
-		  variant={'outlined'}
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('Active')}
+		/>
+		<ButtonWithMemo
+		  title={'Completed'}
 		  color={filter === 'Completed' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('Completed')}>Completed
-		</Button>
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('Completed')}
+		/>
 	  </Grid>
 	</div>
   )
