@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
@@ -10,6 +10,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {Todolist1} from './Todolist1';
 import {FilterValueType} from './Todolist1';
+import {Select} from './components/Select/Select';
+import {v1} from 'uuid';
 
 let theme = createTheme({
   palette: {
@@ -62,7 +64,6 @@ function AppWithRedux() {
 	dispatch(action);
   }, [dispatch])
   
-  
   return (
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
@@ -70,6 +71,9 @@ function AppWithRedux() {
 		<Grid container spacing={4}>
 		  <Grid item xs={12} sm={12} md={12}>
 			<AddItemForm addItem={addTodolist}/>
+		  </Grid>
+		  <Grid item xs={4}>
+			 <Select/>
 		  </Grid>
 		  
 		  {todolists.map(tl => {
