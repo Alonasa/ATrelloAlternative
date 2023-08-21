@@ -2,9 +2,8 @@ import React, {useCallback} from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
-import {Button, Checkbox} from '@mui/material';
+import {Button} from '@mui/material';
 import {Clear} from '@mui/icons-material';
-import ListItem from '@mui/material/ListItem';
 import Grid from '@mui/material/Grid';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
@@ -13,12 +12,9 @@ import {
   ChangeTodolistTitleAC,
   RemoveTodolistAC
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
-import {
-  AddTaskAC,
-  ChangeTaskStatusAC,
-  ChangeTaskTitleAC,
-  RemoveTaskAC
-} from './state/reducers/TasksReducers/TasksReducer';
+import {AddTaskAC} from './state/reducers/TasksReducers/TasksReducer';
+import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
+import {TaskWithRedux} from './components/Task/TaskWithRedux';
 
 type PropsType = {
   tlId: string
@@ -45,24 +41,16 @@ export type FilterValueType = 'All' | 'Active' | 'Completed'
 export const Todolist1 = (props: PropsType) => {
   console.log('TODOLIST')
   const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
-  const {id:tlId, title, filter} = todolist;
+  const {id: tlId, title, filter} = todolist;
   
- let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
+  let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
   
   
   const dispatch = useDispatch();
   
-  const changeFilterHandler = (filter: FilterValueType) => {
+  const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
-  }
-  
-  const changeTaskStatusHandler = (id: string) => {
-	dispatch(ChangeTaskStatusAC(tlId, id))
-  }
-  
-  const removeTaskHandler = (id: string) => {
-	dispatch(RemoveTaskAC(tlId, id))
-  }
+  }, [dispatch])
   
   const addTask = useCallback((title: string) => {
 	dispatch(AddTaskAC(tlId, title))
@@ -99,27 +87,10 @@ export const Todolist1 = (props: PropsType) => {
 	  </div>
 	  <ul className={s.list}>
 		{tasks.map(el => {
-		  const onChangeTitleHandler = (newTitle: string) => {
-			dispatch(ChangeTaskTitleAC(tlId, el.id, newTitle))
-		  }
-		  
 		  return (
-			<ListItem
-			  sx={{
-				padding: '0',
-				display: 'flex',
-				width: '100%'
-			  }} className={el.isDone ? s.finished : ''} key={el.id}>
-			  <Checkbox color={'info'} checked={el.isDone}
-						onChange={() => changeTaskStatusHandler(el.id)}/>
-			  <EditableSpan value={el.title}
-							onChange={onChangeTitleHandler}/>
-			  
-			  <Button
-				sx={{minWidth: 'fit-content', marginLeft: 'auto'}}
-				color={'info'} size={'small'}
-				onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
-			</ListItem>
+			<TaskWithRedux
+			  key={el.id} task={el} tlId={tlId}
+			/>
 		  )
 		})}
 	  </ul>
@@ -130,35 +101,24 @@ export const Todolist1 = (props: PropsType) => {
 		bottom: '0',
 		margin: '1em 0',
 	  }}>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden', minWidth: 'fit-content'
-		  }}
-		  size={'small'}
+		<ButtonWithMemo
+		  title={'All'}
 		  color={filter === 'All' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('All')} variant={'outlined'}>All
-		</Button>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden'
-		  }}
-		  size={'small'}
-		  variant={'outlined'}
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('All')}
+		/>
+		<ButtonWithMemo
+		  title={'Active'}
 		  color={filter === 'Active' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('Active')}>Active
-		</Button>
-		<Button
-		  sx={{
-			flexGrow: 1, wordWrap: 'break-word',
-			overflow: 'hidden'
-		  }}
-		  size={'small'}
-		  variant={'outlined'}
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('Active')}
+		/>
+		<ButtonWithMemo
+		  title={'Completed'}
 		  color={filter === 'Completed' ? 'secondary' : 'primary'}
-		  onClick={() => changeFilterHandler('Completed')}>Completed
-		</Button>
+		  variant={'outlined'} size={'small'}
+		  onClick={() => changeFilterHandler('Completed')}
+		/>
 	  </Grid>
 	</div>
   )
