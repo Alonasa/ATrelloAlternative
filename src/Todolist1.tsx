@@ -2,9 +2,8 @@ import React, {useCallback} from 'react';
 import s from './Todolist.module.css';
 import {AddItemForm} from './components/AddItemForm';
 import {EditableSpan} from './components/EditableSpan';
-import {Button, Checkbox} from '@mui/material';
+import {Button} from '@mui/material';
 import {Clear} from '@mui/icons-material';
-import ListItem from '@mui/material/ListItem';
 import Grid from '@mui/material/Grid';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
@@ -20,6 +19,7 @@ import {
   RemoveTaskAC
 } from './state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
+import {Task} from './components/Task/Task';
 
 type PropsType = {
   tlId: string
@@ -57,13 +57,13 @@ export const Todolist1 = (props: PropsType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
   }
   
-  const changeTaskStatusHandler = (id: string) => {
+  const changeTaskStatusHandler = useCallback((id: string) => {
 	dispatch(ChangeTaskStatusAC(tlId, id))
-  }
+  }, [dispatch])
   
-  const removeTaskHandler = (id: string) => {
+  const removeTaskHandler = useCallback((id: string) => {
 	dispatch(RemoveTaskAC(tlId, id))
-  }
+  }, [dispatch])
   
   const addTask = useCallback((title: string) => {
 	dispatch(AddTaskAC(tlId, title))
@@ -100,27 +100,11 @@ export const Todolist1 = (props: PropsType) => {
 	  </div>
 	  <ul className={s.list}>
 		{tasks.map(el => {
-		  const onChangeTitleHandler = (newTitle: string) => {
-			dispatch(ChangeTaskTitleAC(tlId, el.id, newTitle))
-		  }
+		  
 		  
 		  return (
-			<ListItem
-			  sx={{
-				padding: '0',
-				display: 'flex',
-				width: '100%'
-			  }} className={el.isDone ? s.finished : ''} key={el.id}>
-			  <Checkbox color={'info'} checked={el.isDone}
-						onChange={() => changeTaskStatusHandler(el.id)}/>
-			  <EditableSpan value={el.title}
-							onChange={onChangeTitleHandler}/>
-			  
-			  <Button
-				sx={{minWidth: 'fit-content', marginLeft: 'auto'}}
-				color={'info'} size={'small'}
-				onClick={() => removeTaskHandler(el.id)}><Clear/></Button>
-			</ListItem>
+			<Task key={el.id} task={el} tlId={tlId} onChangeStatus={changeTaskStatusHandler}
+				  removeTask={removeTaskHandler}/>
 		  )
 		})}
 	  </ul>
