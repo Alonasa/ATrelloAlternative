@@ -5,23 +5,34 @@ import {EditableSpan} from '../EditableSpan';
 import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
 import {taskType} from '../../Todolist1';
-import {ChangeTaskTitleAC} from '../../state/reducers/TasksReducers/TasksReducer';
+import {
+  ChangeTaskStatusAC,
+  ChangeTaskTitleAC,
+  RemoveTaskAC
+} from '../../state/reducers/TasksReducers/TasksReducer';
 import {useDispatch} from 'react-redux';
+
 type TaskPropsType = {
   task: taskType
   tlId: string
-  onChangeStatus: (id: string)=>void
-  removeTask: (id:string)=>void
 }
 
-export const Task = memo(({task,tlId,removeTask,onChangeStatus}:TaskPropsType) => {
-  console.log("Task")
-  const { id, title, isDone} = task;
+export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
+  console.log('Task')
+  const {id, title, isDone} = task;
   const dispatch = useDispatch();
   
   const onChangeTitleHandler = useCallback((newTitle: string) => {
 	dispatch(ChangeTaskTitleAC(tlId, id, newTitle))
-  },[dispatch])
+  }, [dispatch])
+  
+  const changeTaskStatusHandler = useCallback((id: string) => {
+	dispatch(ChangeTaskStatusAC(tlId, id))
+  }, [dispatch])
+  
+  const removeTaskHandler = useCallback((id: string) => {
+	dispatch(RemoveTaskAC(tlId, id))
+  }, [dispatch])
   
   return (
 	<ListItem
@@ -31,14 +42,14 @@ export const Task = memo(({task,tlId,removeTask,onChangeStatus}:TaskPropsType) =
 		width: '100%'
 	  }} className={isDone ? s.finished : ''}>
 	  <Checkbox color={'info'} checked={isDone}
-				onChange={() => onChangeStatus(id)}/>
+				onChange={() => changeTaskStatusHandler(id)}/>
 	  <EditableSpan value={title}
 					onChange={onChangeTitleHandler}/>
-	
+	  
 	  <Button
 		sx={{minWidth: 'fit-content', marginLeft: 'auto'}}
 		color={'info'} size={'small'}
-		onClick={() => removeTask(id)}><Clear/></Button>
+		onClick={() => removeTaskHandler(id)}><Clear/></Button>
 	</ListItem>
   );
 })

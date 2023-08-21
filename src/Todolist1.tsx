@@ -12,14 +12,9 @@ import {
   ChangeTodolistTitleAC,
   RemoveTodolistAC
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
-import {
-  AddTaskAC,
-  ChangeTaskStatusAC,
-  ChangeTaskTitleAC,
-  RemoveTaskAC
-} from './state/reducers/TasksReducers/TasksReducer';
+import {AddTaskAC} from './state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
-import {Task} from './components/Task/Task';
+import {TaskWithRedux} from './components/Task/TaskWithRedux';
 
 type PropsType = {
   tlId: string
@@ -53,16 +48,8 @@ export const Todolist1 = (props: PropsType) => {
   
   const dispatch = useDispatch();
   
-  const changeFilterHandler = (filter: FilterValueType) => {
+  const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
-  }
-  
-  const changeTaskStatusHandler = useCallback((id: string) => {
-	dispatch(ChangeTaskStatusAC(tlId, id))
-  }, [dispatch])
-  
-  const removeTaskHandler = useCallback((id: string) => {
-	dispatch(RemoveTaskAC(tlId, id))
   }, [dispatch])
   
   const addTask = useCallback((title: string) => {
@@ -100,11 +87,10 @@ export const Todolist1 = (props: PropsType) => {
 	  </div>
 	  <ul className={s.list}>
 		{tasks.map(el => {
-		  
-		  
 		  return (
-			<Task key={el.id} task={el} tlId={tlId} onChangeStatus={changeTaskStatusHandler}
-				  removeTask={removeTaskHandler}/>
+			<TaskWithRedux
+			  key={el.id} task={el} tlId={tlId}
+			/>
 		  )
 		})}
 	  </ul>
