@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {v1} from 'uuid';
+import s from './Select.module.css'
 
 type ItemType = {
   id: string
@@ -13,7 +14,7 @@ type SelectType = {
 
 export const Select = () => {
   const [show, setShow] = useState(false);
-  const [mood, setMood] = useState<string>('');
+  const [mood, setMood] = useState<string>('Select Your Mood');
   
   const itemsForSelect = [
 	{id:v1(), title: "I'm bad"},
@@ -31,20 +32,21 @@ export const Select = () => {
 	if (item) {
 	  let currentMood = item.title;
 	  setMood(currentMood)
+	  setShow(!show)
 	}
   }
   
   return (
-	<div style={{border: '2px solid gray', margin: '0', minHeight: '30px'}}>
-	  <div style={{display:'flex', justifyContent: 'space-between'}}>
-		<p style={{padding: '0 20px'}}>{mood}</p>
-		<button onClick={onClickHandler}>{show ? '^' : '='}</button>
+	<div className={s.wrapper}>
+	  <div className={s.selectBox}>
+		<p className={s.titleBox}>{mood}</p>
+		<button onClick={onClickHandler}>{show ? '^' : 'v'}</button>
 	  </div>
-	  <ul style={{listStyle: 'none', padding:'0', margin: '0'}}>
+	  <ul className={s.listBox}>
 		{show && itemsForSelect.map((item,index) => {
 		  
 		  return (
-			<li key={item.id} style={{backgroundColor: (index%2==0)? 'gray' : 'inherit', padding: '0 20px'}}
+			<li key={item.id} className={s.listItem} style={{backgroundColor: (index%2==0)? 'gray' : 'inherit'}}
 				  onClick={() => moodHandler(item.id)}>{item.title}<br/></li>
 		  )
 		})
