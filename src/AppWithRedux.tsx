@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
@@ -10,6 +10,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {Todolist1} from './Todolist1';
 import {FilterValueType} from './Todolist1';
+import {Select} from './components/Select/Select';
+import {v1} from 'uuid';
 
 let theme = createTheme({
   palette: {
@@ -61,7 +63,6 @@ function AppWithRedux() {
 	let action = AddTodolistAC(title);
 	dispatch(action);
   }, [dispatch])
-  
   
   return (
 	<ThemeProvider theme={theme}>
