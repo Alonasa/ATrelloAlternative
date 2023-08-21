@@ -44,17 +44,15 @@ export const Todolist1 = (props: PropsType) => {
   const {id: tlId, title, filter} = todolist;
   
   let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
-  
-  
   const dispatch = useDispatch();
   
   const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
-  }, [dispatch])
+  }, [tlId, filter])
   
   const addTask = useCallback((title: string) => {
 	dispatch(AddTaskAC(tlId, title))
-  }, [dispatch])
+  }, [tlId, title])
   
   const changeTodolistTitleHandler = (newTitle: string) => {
 	dispatch(ChangeTodolistTitleAC(tlId, newTitle))

@@ -24,15 +24,15 @@ export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
   
   const onChangeTitleHandler = useCallback((newTitle: string) => {
 	dispatch(ChangeTaskTitleAC(tlId, id, newTitle))
-  }, [dispatch])
+  }, [tlId, id])
   
   const changeTaskStatusHandler = useCallback((id: string) => {
 	dispatch(ChangeTaskStatusAC(tlId, id))
-  }, [dispatch])
+  }, [tlId, id])
   
   const removeTaskHandler = useCallback((id: string) => {
 	dispatch(RemoveTaskAC(tlId, id))
-  }, [dispatch])
+  }, [tlId, id])
   
   return (
 	<ListItem
