@@ -39,7 +39,6 @@ export type TodolistsType = {
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
 export const Todolist1 = (props: PropsType) => {
-  console.log('TODOLIST')
   const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
   const {id: tlId, title, filter} = todolist;
   
