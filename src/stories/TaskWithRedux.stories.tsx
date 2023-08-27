@@ -8,7 +8,11 @@ const meta: Meta<typeof TaskWithRedux> = {
   title: 'Task/TaskWithRedux',
   component: TaskWithRedux,
   tags: ['autodocs'],
-  decorators: [TaskStoreProviderDecorator]
+  decorators: [TaskStoreProviderDecorator],
+  args: {
+    task: {id: '01', title: 'Task for storybook', isDone: false},
+    tlId: store.getState().todolists[1].id
+  }
 };
 
 
@@ -18,9 +22,10 @@ export default meta;
 type Story = StoryObj<typeof TaskWithRedux>;
 
 export const TaskWithReduxUnchecked: Story={
-  render:()=> <TaskWithRedux task={{id: '01', title: 'Task for storybook', isDone: false}} tlId={store.getState().todolists[1].id}/>
 }
 
 export const TaskWithReduxChecked: Story={
-  render:()=> <TaskWithRedux task={{id: '01', title: 'Task for storybook', isDone: true}} tlId={store.getState().todolists[1].id}/>
+  args: {
+    task: {id: '01', title: 'Task for storybook', isDone: true},
+  }
 }
