@@ -18,7 +18,6 @@ type TaskPropsType = {
 }
 
 export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
-  console.log('Task')
   const {id, title, isDone} = task;
   const dispatch = useDispatch();
   
