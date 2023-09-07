@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {TodolistsType} from '../Todolist1';
-import {TodolistsAPI} from '../api/api';
+import {TodolistsAPI} from '../api/todolists-api';
 
 export default {
   title: 'API'
