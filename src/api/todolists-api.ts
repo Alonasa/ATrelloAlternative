@@ -39,7 +39,9 @@ export const TodolistsAPI = {
 	return instance.get(`todo-lists/${todolistId}/tasks`)
   },
   createTask(todolistId: string, title: string) {
-    let checkLenght = title.length<100 ? title : 'Message is too long'
 	return instance.post(`todo-lists/${todolistId}/tasks`, {title})
+  },
+  updateTask(todolistId: string, taskId: string, title: string){
+    return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
   }
 }
