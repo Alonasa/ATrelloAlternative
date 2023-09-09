@@ -43,5 +43,8 @@ export const TodolistsAPI = {
   },
   updateTask(todolistId: string, taskId: string, title: string){
     return instance.put(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+  },
+  deleteTask(todolistId: string, taskId: string){
+    return instance.delete(`todo-lists/${todolistId}/tasks/${taskId}`)
   }
 }
