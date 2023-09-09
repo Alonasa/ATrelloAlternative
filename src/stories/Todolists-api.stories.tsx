@@ -52,3 +52,51 @@ export const DeleteTodolist = () => {
   }, [])
   return <div>{JSON.stringify(state)}</div>
 }
+
+export const GetTasks = () => {
+  const [state, setState] = useState<any | null>(null)
+  
+  useEffect(() => {
+	TodolistsAPI.getTasks('607d4742-032c-4c3e-9d63-76b3a40600d5')
+	  .then((res) => {
+		setState(res.data)
+	  })
+  }, [])
+  return <div>{JSON.stringify(state)}</div>
+}
+
+export const CreateTask = () => {
+  const [state, setState] = useState<any | null>(null)
+  
+  useEffect(() => {
+	TodolistsAPI.createTask('607d4742-032c-4c3e-9d63-76b3a40600d5', 'New Title')
+	  .then((res) => {
+		setState(res.data)
+	  })
+  }, [])
+  return <div>{JSON.stringify(state)}</div>
+}
+
+export const UpdateTask = () => {
+  const [state, setState] = useState<any | null>(null)
+  
+  useEffect(() => {
+	TodolistsAPI.updateTask('607d4742-032c-4c3e-9d63-76b3a40600d5', '1da1a1bc-8f53-42e6-a049-5ea0e09cbd4e', 'New Title Added')
+	  .then((res) => {
+		setState(res.data)
+	  })
+  }, [])
+  return <div>{JSON.stringify(state)}</div>
+}
+
+export const DeleteTask = () => {
+  const [state, setState] = useState<any | null>(null)
+  
+  useEffect(()=> {
+    TodolistsAPI.deleteTask('607d4742-032c-4c3e-9d63-76b3a40600d5', '159c1655-8c46-4c56-8077-45504ad4478a')
+	  .then((res)=>{
+	    setState(res.data)
+	  })
+  }, [])
+  return <div>{JSON.stringify(state)}</div>
+}
