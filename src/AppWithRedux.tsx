@@ -1,14 +1,18 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
 import {createTheme, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {AddTodolistAC} from './state/reducers/TodolistsReducer/TodolistsReducer';
+import {
+  AddTodolistAC,
+  SetTodolistsAC
+} from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppRootStateType} from './state/store';
 import {FilterValueType, Todolist1} from './Todolist1';
+import {TodolistsAPI} from './api/todolists-api';
 
 let theme = createTheme({
   palette: {
@@ -53,8 +57,14 @@ export type TodolistsType = {
 
 function AppWithRedux() {
   let todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists);
-  
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+	TodolistsAPI.getTodolists()
+	  .then(res => {
+		dispatch(SetTodolistsAC(res.data))
+	  })
+  }, [])
   
   const addTodolist = useCallback((title: string) => {
 	let action = AddTodolistAC(title);
