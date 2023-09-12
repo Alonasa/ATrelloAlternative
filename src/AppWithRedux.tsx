@@ -79,7 +79,6 @@ function AppWithRedux() {
 		  <Grid item xs={12} sm={12} md={12}>
 			<AddItemForm addItem={addTodolist}/>
 		  </Grid>
-		  
 		  {todolists.map(tl => {
 			return (
 			  <Grid key={tl.id} item xs={12} sm={6} md={4}>

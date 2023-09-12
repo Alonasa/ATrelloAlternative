@@ -83,7 +83,7 @@ export const Todolist1 = (props: PropsType) => {
 		<AddItemForm addItem={addTask}/>
 	  </div>
 	  <ul className={s.list}>
-		{tasks.map(el => {
+		{tasks?.map(el => {
 		  return (
 			<TaskWithRedux
 			  key={el.id} task={el} tlId={tlId}
