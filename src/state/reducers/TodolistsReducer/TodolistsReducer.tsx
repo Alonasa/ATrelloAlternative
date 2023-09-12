@@ -56,7 +56,7 @@ export type AddTodolistACType = ReturnType<typeof AddTodolistAC>
 export type RemoveTodolistACType = ReturnType<typeof RemoveTodolistAC>
 type ChangeTodolistFilterACType = ReturnType<typeof ChangeTodolistFilterAC>
 type ChangeTodolistTitleACType = ReturnType<typeof ChangeTodolistTitleAC>
-type SetTodolistACType = ReturnType<typeof SetTodolistsAC>
+export type SetTodolistACType = ReturnType<typeof SetTodolistsAC>
 
 
 export const AddTodolistAC = (title: string) => {

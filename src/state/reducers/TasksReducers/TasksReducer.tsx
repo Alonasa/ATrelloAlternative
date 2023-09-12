@@ -2,7 +2,7 @@ import {TasksType} from '../../../Todolist1';
 import {v1} from 'uuid';
 import {
   AddTodolistACType,
-  RemoveTodolistACType
+  RemoveTodolistACType, SetTodolistACType
 } from '../TodolistsReducer/TodolistsReducer';
 
 const initialState: TasksType = {
@@ -24,6 +24,15 @@ const initialState: TasksType = {
 
 export const TasksReducer = (state: TasksType = initialState, action: ActionsType) => {
   switch (action.type) {
+	case 'SET-TODOS': {
+	  const copyState = {...state}
+	  action.todos.forEach((td) => {
+		copyState[td.id] = []
+	  })
+	  return copyState
+	}
+	
+	
 	case 'ADD-TASK': {
 	  return {
 		...state,
@@ -82,6 +91,7 @@ type ActionsType =
   | ChangeTaskTitleACType
   | AddTodolistACType
   | RemoveTodolistACType
+  | SetTodolistACType
 
 type AddTaskACType = ReturnType<typeof AddTaskAC>
 type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
