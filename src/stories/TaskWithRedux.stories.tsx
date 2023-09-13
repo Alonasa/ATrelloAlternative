@@ -13,7 +13,7 @@ const meta: Meta<typeof TaskWithRedux> = {
   decorators: [TaskStoreProviderDecorator],
   args: {
 	task: {id: '01', title: 'Task for storybook', isDone: false},
-	tlId: store.getState().todolists[1].id
+	tlId: store.getState().todolists[1]['id']
   },
 };
 

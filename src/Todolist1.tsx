@@ -10,7 +10,7 @@ import {AppRootStateType} from './state/store';
 import {
   ChangeTodolistFilterAC,
   ChangeTodolistTitleAC,
-  RemoveTodolistAC, TodolistDomainType
+  RemoveTodolistAC
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {AddTaskAC} from './state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
@@ -34,16 +34,18 @@ export type TodolistsType = {
   id: string
   title: string
   filter: FilterValueType
+  addedDate: string
+  order: number
 }
 
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
 export const Todolist1 = (props: PropsType) => {
-  const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state=> state.todolists)
+  const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
   
-  let todolist = todolists.find(tl=>tl.id===props.tlId)
-  console.log(todolist)
-  const {id: tlId, title, filter} = todolist;
+  console.log(todolists)
+  const {id: tlId, title, filter} = todolists;
+  console.log(title)
   
   let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
   const dispatch = useDispatch();
