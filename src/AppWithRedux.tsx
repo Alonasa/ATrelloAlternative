@@ -7,12 +7,11 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {
   AddTodolistAC,
-  SetTodolistsAC
+  getTodo,
+  TodolistDomainType
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppRootStateType} from './state/store';
+import {useAppDispatch, useAppSelector} from './state/store';
 import {FilterValueType, Todolist1} from './Todolist1';
-import {TodolistsAPI} from './api/todolists-api';
 
 let theme = createTheme({
   palette: {
@@ -56,20 +55,17 @@ export type TodolistsType = {
 }
 
 function AppWithRedux() {
-  let todolists = useSelector<AppRootStateType, Array<TodolistsType>>(state => state.todolists);
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-	TodolistsAPI.getTodolists()
-	  .then(res => {
-		dispatch(SetTodolistsAC(res.data))
-	  })
-  }, [])
+  let todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
+  const dispatch = useAppDispatch();
   
   const addTodolist = useCallback((title: string) => {
 	let action = AddTodolistAC(title);
 	dispatch(action);
   }, [dispatch])
+  
+  useEffect(() => {
+	dispatch(getTodo)
+  },[])
   
   return (
 	<ThemeProvider theme={theme}>

@@ -10,7 +10,7 @@ import {AppRootStateType} from './state/store';
 import {
   ChangeTodolistFilterAC,
   ChangeTodolistTitleAC,
-  RemoveTodolistAC
+  RemoveTodolistAC, TodolistDomainType
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {AddTaskAC} from './state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
@@ -39,7 +39,10 @@ export type TodolistsType = {
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
 export const Todolist1 = (props: PropsType) => {
-  const todolist: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
+  const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state=> state.todolists)
+  
+  let todolist = todolists.find(tl=>tl.id===props.tlId)
+  console.log(todolist)
   const {id: tlId, title, filter} = todolist;
   
   let tasks = useSelector<AppRootStateType, Array<taskType>>(state => state.tasks[props.tlId])
@@ -60,7 +63,6 @@ export const Todolist1 = (props: PropsType) => {
   const removeTodolistHandler = (tlId: string) => {
 	dispatch(RemoveTodolistAC(tlId))
   }
-  
   
   if (filter === 'Active') {
 	tasks = tasks.filter(t => !t.isDone)
