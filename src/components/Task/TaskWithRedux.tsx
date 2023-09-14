@@ -8,9 +8,10 @@ import {taskType} from '../../Todolist1';
 import {
   ChangeTaskStatusAC,
   ChangeTaskTitleAC,
-  RemoveTaskAC
+  RemoveTaskAC, RemoveTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
 import {useDispatch} from 'react-redux';
+import {useAppDispatch} from '../../state/store';
 
 type TaskPropsType = {
   task: taskType
@@ -19,7 +20,7 @@ type TaskPropsType = {
 
 export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
   const {id, title, isDone} = task;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
   const onChangeTitleHandler = useCallback((newTitle: string) => {
 	dispatch(ChangeTaskTitleAC(tlId, id, newTitle))
@@ -30,7 +31,7 @@ export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
   }, [tlId, id])
   
   const removeTaskHandler = useCallback((id: string) => {
-	dispatch(RemoveTaskAC(tlId, id))
+	dispatch(RemoveTaskTC(tlId, id))
   }, [tlId, id])
   
   return (
