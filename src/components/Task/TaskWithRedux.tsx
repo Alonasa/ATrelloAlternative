@@ -7,7 +7,7 @@ import ListItem from '@mui/material/ListItem';
 import {taskType} from '../../Todolist1';
 import {
   ChangeTaskStatusAC,
-  ChangeTaskTitleAC,
+  ChangeTaskTitleAC, ChangeTaskTitleTC,
   RemoveTaskAC, RemoveTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
 import {useDispatch} from 'react-redux';
@@ -23,7 +23,7 @@ export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
   const dispatch = useAppDispatch();
   
   const onChangeTitleHandler = useCallback((newTitle: string) => {
-	dispatch(ChangeTaskTitleAC(tlId, id, newTitle))
+	dispatch(ChangeTaskTitleTC(tlId, id, newTitle))
   }, [tlId, id])
   
   const changeTaskStatusHandler = useCallback((id: string) => {

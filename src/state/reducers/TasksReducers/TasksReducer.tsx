@@ -171,3 +171,10 @@ export const AddTaskTC = (tlId: string, title: string)=> (dispatch: Dispatch)=> 
 	  dispatch(AddTaskAC(tlId,title))
 	})
 }
+
+export const ChangeTaskTitleTC = (tlId: string, id: string, newTitle: string) => (dispatch: Dispatch) => {
+ TodolistsAPI.updateTask(tlId, id, newTitle)
+   .then(res=> {
+     dispatch(ChangeTaskTitleAC(tlId,id,newTitle))
+   })
+}
