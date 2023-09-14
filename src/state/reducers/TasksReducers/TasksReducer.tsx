@@ -164,3 +164,10 @@ export const RemoveTaskTC = (tlId: string, taskId: string) => (dispatch: Dispatc
 	  dispatch(RemoveTaskAC(tlId, taskId))
 	})
 }
+
+export const AddTaskTC = (tlId: string, title: string)=> (dispatch: Dispatch)=> {
+  TodolistsAPI.createTask(tlId, title)
+	.then(res=> {
+	  dispatch(AddTaskAC(tlId,title))
+	})
+}

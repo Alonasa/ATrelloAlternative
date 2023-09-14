@@ -14,6 +14,7 @@ import {
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {
   AddTaskAC,
+  AddTaskTC,
   GetTasksTC
 } from './state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
@@ -60,7 +61,7 @@ export const Todolist1 = (props: PropsType) => {
   }, [tlId, filter])
   
   const addTask = useCallback((title: string) => {
-	dispatch(AddTaskAC(tlId, title))
+	dispatch(AddTaskTC(tlId, title))
   }, [tlId, title])
   
   const changeTodolistTitleHandler = (newTitle: string) => {
