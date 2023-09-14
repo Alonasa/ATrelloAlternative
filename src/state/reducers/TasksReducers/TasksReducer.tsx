@@ -1,29 +1,35 @@
-import {TasksType} from '../../../Todolist1';
+import {TasksType, taskType} from '../../../Todolist1';
 import {v1} from 'uuid';
 import {
   AddTodolistACType,
   RemoveTodolistACType, SetTodolistACType
 } from '../TodolistsReducer/TodolistsReducer';
+import {Dispatch} from 'redux';
+import {TodolistsAPI} from '../../../api/todolists-api';
 
 const initialState: TasksType = {
-  ['todolistID1']: [
-	{id: v1(), title: 'HTML&CSS', isDone: true},
-	{id: v1(), title: 'JS', isDone: true},
-	{id: v1(), title: 'ReactJS', isDone: false},
-	{id: v1(), title: 'Rest API', isDone: false},
-	{id: v1(), title: 'GraphQL', isDone: false},
-  ],
-  ['todolistID2']: [
-	{id: v1(), title: 'HTML&CSS2', isDone: true},
-	{id: v1(), title: 'JS2', isDone: true},
-	{id: v1(), title: 'ReactJS2', isDone: false},
-	{id: v1(), title: 'Rest API2', isDone: false},
-	{id: v1(), title: 'GraphQL2', isDone: false},
-  ]
+  // ['todolistID1']: [
+	// {id: v1(), title: 'HTML&CSS', isDone: true},
+	// {id: v1(), title: 'JS', isDone: true},
+	// {id: v1(), title: 'ReactJS', isDone: false},
+	// {id: v1(), title: 'Rest API', isDone: false},
+	// {id: v1(), title: 'GraphQL', isDone: false},
+  // ],
+  // ['todolistID2']: [
+	// {id: v1(), title: 'HTML&CSS2', isDone: true},
+	// {id: v1(), title: 'JS2', isDone: true},
+	// {id: v1(), title: 'ReactJS2', isDone: false},
+	// {id: v1(), title: 'Rest API2', isDone: false},
+	// {id: v1(), title: 'GraphQL2', isDone: false},
+  // ]
 }
 
 export const TasksReducer = (state: TasksType = initialState, action: ActionsType) => {
   switch (action.type) {
+	case 'GET-TASKS': {
+	  return {...state, [action.payload.tlId]: action.payload.tasks}
+	  }
+ 
 	case 'SET-TODOS': {
 	  const copyState = {...state}
 	  action.todos.forEach((td) => {
@@ -31,7 +37,6 @@ export const TasksReducer = (state: TasksType = initialState, action: ActionsTyp
 	  })
 	  return copyState
 	}
-	
 	
 	case 'ADD-TASK': {
 	  return {
@@ -92,6 +97,7 @@ type ActionsType =
   | AddTodolistACType
   | RemoveTodolistACType
   | SetTodolistACType
+  | ReturnType<typeof GetTasksAC>
 
 type AddTaskACType = ReturnType<typeof AddTaskAC>
 type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
@@ -132,4 +138,21 @@ export const ChangeTaskTitleAC = (tlId: string, id: string, newTitle: string) =>
 	  tlId, id, newTitle
 	}
   } as const
+}
+
+export const GetTasksAC = (tasks: taskType[], tlId: string) => {
+  return {
+	type: 'GET-TASKS',
+	payload: {
+	  tlId,
+	  tasks
+	}
+  } as const
+}
+
+export const GetTasksTC = (tlId: string) => (dispatch: Dispatch) => {
+	TodolistsAPI.getTasks(tlId)
+	  .then(res=>{
+		dispatch(GetTasksAC(res.data.items, tlId))
+	  })
 }
