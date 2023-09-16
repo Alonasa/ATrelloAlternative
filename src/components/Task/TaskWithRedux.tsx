@@ -4,26 +4,27 @@ import {Button, Checkbox} from '@mui/material';
 import {EditableSpan} from '../EditableSpan';
 import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
-import {taskType} from '../../Todolist1';
 import {
   ChangeTaskStatusAC,
-  ChangeTaskTitleAC,
-  RemoveTaskAC, RemoveTaskTC
+  ChangeTaskTitleTC,
+  RemoveTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
-import {useDispatch} from 'react-redux';
 import {useAppDispatch} from '../../state/store';
+import {TaskType} from '../../api/todolists-api';
 
 type TaskPropsType = {
-  task: taskType
+  task: TaskType
   tlId: string
 }
 
 export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
-  const {id, title, isDone} = task;
+  const {id, title, status} = task;
   const dispatch = useAppDispatch();
   
+  console.log(task)
+  
   const onChangeTitleHandler = useCallback((newTitle: string) => {
-	dispatch(ChangeTaskTitleAC(tlId, id, newTitle))
+	dispatch(ChangeTaskTitleTC(tlId, id, newTitle))
   }, [tlId, id])
   
   const changeTaskStatusHandler = useCallback((id: string) => {
@@ -40,8 +41,8 @@ export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
 		padding: '0',
 		display: 'flex',
 		width: '100%'
-	  }} className={isDone ? s.finished : ''}>
-	  <Checkbox color={'info'} checked={isDone}
+	  }} className={status === 2 ? s.finished : ''}>
+	  <Checkbox color={'info'} checked={status > 0 ? true : false}
 				onChange={() => changeTaskStatusHandler(id)}/>
 	  <EditableSpan value={title}
 					onChange={onChangeTitleHandler}/>
