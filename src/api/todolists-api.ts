@@ -70,8 +70,8 @@ export const TodolistsAPI = {
   getTodolists() {
 	return instance.get<Array<TodolistType>>('todo-lists')
   },
-  createTodolist() {
-	return instance.post<ResponseType<{ item: TodolistType }>>('todo-lists', {title: 'React'})
+  createTodolist(title: string) {
+	return instance.post<ResponseType<{item: TodolistType}>>('todo-lists', {title})
   },
   updateTodolist(todolistId: string, title: string) {
 	return instance.put<ResponseType>(`todo-lists/${todolistId}`, {title})
