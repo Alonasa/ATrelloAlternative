@@ -6,8 +6,8 @@ import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {
-  AddTodolistAC,
-  getTodo,
+  CreateTodolistTC,
+  GetTodo,
   TodolistDomainType
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {useAppDispatch, useAppSelector} from './state/store';
@@ -59,13 +59,13 @@ function AppWithRedux() {
   const dispatch = useAppDispatch();
   
   const addTodolist = useCallback((title: string) => {
-	let action = AddTodolistAC(title);
+	let action = CreateTodolistTC(title);
 	dispatch(action);
   }, [dispatch])
   
   useEffect(() => {
-	dispatch(getTodo)
-  },[])
+	dispatch(GetTodo)
+  }, [])
   
   return (
 	<ThemeProvider theme={theme}>

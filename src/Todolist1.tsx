@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './state/store';
 import {
   ChangeTodolistFilterAC,
-  ChangeTodolistTitleAC,
+  ChangeTodolistTitleAC, ChangeTodolistTitleTC, DeleteTodolistTC,
   RemoveTodolistAC
 } from './state/reducers/TodolistsReducer/TodolistsReducer';
 import {
@@ -49,6 +49,7 @@ export const Todolist1 = (props: PropsType) => {
   
   let tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.tlId])
   
+  console.log(tasks)
   
   const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
@@ -59,11 +60,11 @@ export const Todolist1 = (props: PropsType) => {
   }, [tlId, title])
   
   const changeTodolistTitleHandler = (newTitle: string) => {
-	dispatch(ChangeTodolistTitleAC(tlId, newTitle))
+	dispatch(ChangeTodolistTitleTC(tlId, newTitle))
   }
   
   const removeTodolistHandler = (tlId: string) => {
-	dispatch(RemoveTodolistAC(tlId))
+	dispatch(DeleteTodolistTC(tlId))
   }
   
   if (filter === 'Active') {
