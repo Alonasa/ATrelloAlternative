@@ -41,7 +41,18 @@ beforeEach(() => {
 test('New task should be added to the correct todolist', () => {
 	let title = 'New task title';
 	
-	const endState = TasksReducer(startState, AddTaskAC(todolistID2, title))
+	let task = {
+	  id: '7', title: title, status: 0,
+	  addedDate: '2023-09-09T10:43:35.683',
+	  deadline: 'null',
+	  description: 'null',
+	  order: -11,
+	  priority: 1,
+	  startDate: 'null',
+	  todoListId: todolistID1
+	}
+	
+	const endState = TasksReducer(startState, AddTaskAC(task,todolistID2))
 	
 	expect(startState[todolistID2].length).toBe(5);
 	expect(endState[todolistID2].length).toBe(6);
