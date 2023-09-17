@@ -14,7 +14,7 @@ import {
 
 let todolistID1: string;
 let todolistID2: string;
-let startState: TasksType
+let startState: any
 
 beforeEach(() => {
   todolistID1 = v1();
