@@ -49,8 +49,6 @@ export const Todolist1 = (props: PropsType) => {
   
   let tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.tlId])
   
-  console.log(tasks)
-  
   const changeFilterHandler = useCallback((filter: FilterValueType) => {
 	dispatch(ChangeTodolistFilterAC(tlId, filter))
   }, [tlId, filter])
