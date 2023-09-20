@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
-import {createTheme, ThemeProvider} from '@mui/material';
+import {createTheme, LinearProgress, ThemeProvider} from '@mui/material';
 import {Menu} from './components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -70,6 +70,7 @@ function AppWithRedux() {
   return (
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
+	  <LinearProgress/>
 	  <div className="App" color={'info'}>
 		<Grid container spacing={4}>
 		  <Grid item xs={12} sm={12} md={12}>
