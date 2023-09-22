@@ -1,5 +1,5 @@
-import {TasksReducer} from './reducers/TasksReducers/TasksReducer';
-import {TodolistsReducer} from './reducers/TodolistsReducer/TodolistsReducer';
+import {TasksReducer} from '../state/reducers/TasksReducers/TasksReducer';
+import {TodolistsReducer} from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {
   AnyAction,
   applyMiddleware,

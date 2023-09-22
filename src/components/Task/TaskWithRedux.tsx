@@ -1,5 +1,5 @@
 import React, {ChangeEvent, memo, useCallback} from 'react';
-import s from '../../Todolist.module.css';
+import s from '../../todolist/Todolist.module.css';
 import {Button, Checkbox} from '@mui/material';
 import {EditableSpan} from '../EditableSpan';
 import {Clear} from '@mui/icons-material';
@@ -9,7 +9,7 @@ import {
   RemoveTaskTC,
   UpdateTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
-import {useAppDispatch} from '../../state/store';
+import {useAppDispatch} from '../../app/store';
 import {TaskStatuses, TaskType} from '../../api/todolists-api';
 
 type TaskPropsType = {

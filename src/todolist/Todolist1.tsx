@@ -1,24 +1,24 @@
 import React, {useCallback, useEffect} from 'react';
 import s from './Todolist.module.css';
-import {AddItemForm} from './components/AddItemForm';
-import {EditableSpan} from './components/EditableSpan';
+import {AddItemForm} from '../components/AddItemForm';
+import {EditableSpan} from '../components/EditableSpan';
 import {Button} from '@mui/material';
 import {Clear} from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from './state/store';
+import {AppRootStateType, useAppDispatch} from '../app/store';
 import {
   ChangeTodolistFilterAC,
   ChangeTodolistTitleAC, ChangeTodolistTitleTC, DeleteTodolistTC,
   RemoveTodolistAC
-} from './state/reducers/TodolistsReducer/TodolistsReducer';
+} from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {
   AddTaskTC,
   GetTasksTC
-} from './state/reducers/TasksReducers/TasksReducer';
-import {ButtonWithMemo} from './components/ButtonWithMemo/ButtonWithMemo';
-import {TaskWithRedux} from './components/Task/TaskWithRedux';
-import {TaskType} from './api/todolists-api';
+} from '../state/reducers/TasksReducers/TasksReducer';
+import {ButtonWithMemo} from '../components/ButtonWithMemo/ButtonWithMemo';
+import {TaskWithRedux} from '../components/Task/TaskWithRedux';
+import {TaskType} from '../api/todolists-api';
 
 type PropsType = {
   tlId: string

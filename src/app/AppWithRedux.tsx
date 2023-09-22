@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {AddItemForm} from './components/AddItemForm';
+import {AddItemForm} from '../components/AddItemForm';
 import {createTheme, LinearProgress, ThemeProvider} from '@mui/material';
-import {Menu} from './components/Menu/Menu';
+import {Menu} from '../components/Menu/Menu';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import {
   CreateTodolistTC,
   GetTodo,
   TodolistDomainType
-} from './state/reducers/TodolistsReducer/TodolistsReducer';
-import {useAppDispatch, useAppSelector} from './state/store';
-import {FilterValueType, Todolist1} from './Todolist1';
+} from '../state/reducers/TodolistsReducer/TodolistsReducer';
+import {useAppDispatch, useAppSelector} from './store';
+import {FilterValueType, Todolist1} from '../todolist/Todolist1';
 
 let theme = createTheme({
   palette: {

@@ -4,9 +4,9 @@ import React from 'react'; //We are starting
 import ReactDOM from 'react-dom/client'; //Framework for
 // building web applications
 import './index.css';
-import AppWithRedux from './AppWithRedux';
+import AppWithRedux from './app/AppWithRedux';
 import {Provider} from 'react-redux';
-import {store} from './state/store'; // import styles
+import {store} from './app/store'; // import styles
 
 // React DOM will render App element inside element with id root
 const root = ReactDOM.createRoot(
