@@ -1,5 +1,5 @@
 import React from 'react';
-import {FilterValueType, TodolistsType} from '../../../Todolist1';
+import {FilterValueType, TodolistsType} from '../../../todolist/Todolist1';
 import {v1} from 'uuid';
 import {TodolistsAPI, TodolistType} from '../../../api/todolists-api';
 import {Dispatch} from 'redux';
@@ -15,7 +15,6 @@ export const TodolistsReducer = (state: Array<TodolistDomainType> = initialState
 	case 'SET-TODOS': {
 	  return action.todos.map((el) => ({...el, filter: 'All'}))
 	}
-	
 	case 'ADD-TODOLIST': {
 	  return [{
 		id: action.payload.tlId,

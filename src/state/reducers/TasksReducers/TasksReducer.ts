@@ -1,4 +1,4 @@
-import {TasksType} from '../../../Todolist1';
+import {TasksType} from '../../../todolist/Todolist1';
 import {
   AddTodolistACType,
   RemoveTodolistACType,
@@ -11,7 +11,7 @@ import {
   TodolistsAPI,
   UpdateTaskModelType
 } from '../../../api/todolists-api';
-import {AppRootStateType} from '../../store';
+import {AppRootStateType} from '../../../app/store';
 
 const initialState: TasksType = {
   // ['todolistID1']: [

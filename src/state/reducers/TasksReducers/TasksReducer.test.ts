@@ -1,5 +1,5 @@
 import {v1} from 'uuid';
-import {TasksType} from '../../../Todolist1';
+import {TasksType} from '../../../todolist/Todolist1';
 import {
   AddTaskAC,
   ChangeTaskStatusAC,
