@@ -1,6 +1,4 @@
 import {v1} from 'uuid';
-import {TasksType} from '../../../todolist/Todolist1';
-import axios, {AxiosResponse} from 'axios';
 import {
   AddTaskAC,
   ChangeTaskStatusAC,
@@ -84,13 +82,13 @@ test('Task should be removed from correct todolist', () => {
 
 
 test('Correct task should change it\'s status', () => {
-  const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3', 0))
+  const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3', 1))
   
   expect(startState[todolistID2].length).toBe(5)
   expect(endState[todolistID2].length).toBe(5)
-  expect(startState[todolistID2][2].status).toBe(false);
-  expect(endState[todolistID2][2].status).toBe(true);
-  expect(endState[todolistID1][2].status).toBe(false);
+  expect(startState[todolistID2][2].status).toBe(0);
+  expect(endState[todolistID2][2].status).toBe(1);
+  expect(endState[todolistID1][2].status).toBe(0);
 })
 
 
