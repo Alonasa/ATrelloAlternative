@@ -12,6 +12,7 @@ import {
 } from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {useAppDispatch, useAppSelector} from './store';
 import {FilterValueType, Todolist1} from '../todolist/Todolist1';
+import {RequestStatusType} from './app-reducer';
 
 let theme = createTheme({
   palette: {
@@ -55,22 +56,21 @@ export type TodolistsType = {
 }
 
 function AppWithRedux() {
-  let todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
   const dispatch = useAppDispatch();
-  
   const addTodolist = useCallback((title: string) => {
 	let action = CreateTodolistTC(title);
 	dispatch(action);
   }, [dispatch])
-  
   useEffect(() => {
 	dispatch(GetTodo)
   }, [])
+  let todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
+  let status = useAppSelector<RequestStatusType>((state)=> state.app.status)
   
   return (
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
-	  <LinearProgress/>
+	  {status=== "loading" && <LinearProgress/>}
 	  <div className="App" color={'info'}>
 		<Grid container spacing={4}>
 		  <Grid item xs={12} sm={12} md={12}>
