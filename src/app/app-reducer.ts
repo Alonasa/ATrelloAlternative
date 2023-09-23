@@ -1,25 +1,3 @@
-// export type  RequestSatatusType = 'idle' | 'loading' | 'succeed'| 'failed'
-//
-// const initialSate = {
-//   status: 'loading' as RequestSatatusType
-// }
-//
-// type initialStateType = typeof initialSate
-//
-// type ActionsType = any
-//
-// export const AppReducer = (state: initialStateType, action: ActionsType): initialStateType=> {
-//   switch (action.type) {
-// 	case 'APP/SET-STATUS': {
-// 	  return {...state, status: action.status}
-// 	}
-// 	default: return state
-//   }
-// }
-//
-
-
-
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const initialState = {
