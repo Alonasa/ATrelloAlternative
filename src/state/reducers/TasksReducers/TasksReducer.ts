@@ -12,6 +12,7 @@ import {
   UpdateTaskModelType
 } from '../../../api/todolists-api';
 import {AppRootStateType} from '../../../app/store';
+import {SetAppStatusACType} from '../../../app/app-reducer';
 
 const initialState: TasksType = {
   // ['todolistID1']: [
@@ -57,15 +58,14 @@ export const TasksReducer = (state: TasksType = initialState, action: ActionsTyp
 	  }
 	}
 	case 'CHANGE-TASK-STATUS': {
-	  let todolistTasks = state[action.payload.tlId];
-	  let newTasksArray = todolistTasks
-		.map(t => t.id === action.payload.id ? {
-		  ...t,
-		  status: action.payload.status
-		} : t);
-	  
-	  state[action.payload.tlId] = newTasksArray;
-	  return ({...state});
+	  return {
+		...state,
+		[action.payload.tlId]: state[action.payload.tlId].map(t =>
+		  t.id === action.payload.id ? {
+			...t,
+			status: action.payload.status
+		  } : t)
+	  }
 	}
 	case 'CHANGE-TASK-TITLE': {
 	  return {
@@ -101,6 +101,7 @@ type ActionsType =
   | RemoveTodolistACType
   | SetTodolistACType
   | ReturnType<typeof GetTasksAC>
+  | SetAppStatusACType
 
 type AddTaskACType = ReturnType<typeof AddTaskAC>
 type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
@@ -187,8 +188,10 @@ export const UpdateTaskTC = (tlId: string, id: string, status: TaskStatuses) => 
 	  deadline: task.deadline
 	}
 	
-	TodolistsAPI.updateTask(tlId,id,model)
-	  .then(res=>{dispatch(ChangeTaskStatusAC(tlId,id,model.status))})
+	TodolistsAPI.updateTask(tlId, id, model)
+	  .then(res => {
+		dispatch(ChangeTaskStatusAC(tlId, id, model.status))
+	  })
   }
 }
 
@@ -205,7 +208,9 @@ export const ChangeTaskTitleTC = (tlId: string, id: string, newTitle: string) =>
 	  deadline: task.deadline
 	}
 	
-	TodolistsAPI.updateTask(tlId,id,model)
-	  .then(res=>{dispatch(ChangeTaskTitleAC(tlId,id,model.title))})
+	TodolistsAPI.updateTask(tlId, id, model)
+	  .then(res => {
+		dispatch(ChangeTaskTitleAC(tlId, id, model.title))
+	  })
   }
 }

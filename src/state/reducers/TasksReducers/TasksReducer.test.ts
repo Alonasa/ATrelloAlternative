@@ -1,5 +1,4 @@
 import {v1} from 'uuid';
-import {TasksType} from '../../../todolist/Todolist1';
 import {
   AddTaskAC,
   ChangeTaskStatusAC,
@@ -52,7 +51,7 @@ test('New task should be added to the correct todolist', () => {
 	  todoListId: todolistID1
 	}
 	
-	const endState = TasksReducer(startState, AddTaskAC(task,todolistID2))
+	const endState = TasksReducer(startState, AddTaskAC(task, todolistID2))
 	
 	expect(startState[todolistID2].length).toBe(5);
 	expect(endState[todolistID2].length).toBe(6);
@@ -66,30 +65,30 @@ test('Task should be removed from correct todolist', () => {
   expect(endState).toEqual(
 	{
 	  [todolistID1]: [
-		{id: '2', title: 'JS', isDone: true},
-		{id: '3', title: 'ReactJS', isDone: false},
-		{id: '4', title: 'Rest API', isDone: false},
-		{id: '5', title: 'GraphQL', isDone: false},
+		{id: '2', title: 'JS', status: 2},
+		{id: '3', title: 'ReactJS', status: 0},
+		{id: '4', title: 'Rest API', status: 0},
+		{id: '5', title: 'GraphQL', status: 0},
 	  ],
 	  [todolistID2]: [
-		{id: '1', title: 'HTML&CSS2', isDone: true},
-		{id: '2', title: 'JS2', isDone: true},
-		{id: '3', title: 'ReactJS2', isDone: false},
-		{id: '4', title: 'Rest API2', isDone: false},
-		{id: '5', title: 'GraphQL2', isDone: false},
+		{id: '1', title: 'HTML&CSS2', status: 0},
+		{id: '2', title: 'JS', status: 0},
+		{id: '3', title: 'ReactJS', status: 0},
+		{id: '4', title: 'Rest API', status: 0},
+		{id: '5', title: 'GraphQL', status: 0},
 	  ],
 	})
 })
 
 
 test('Correct task should change it\'s status', () => {
-  const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3'))
+  const endState = TasksReducer(startState, ChangeTaskStatusAC(todolistID2, '3', 1))
   
   expect(startState[todolistID2].length).toBe(5)
   expect(endState[todolistID2].length).toBe(5)
-  expect(startState[todolistID2][2].status).toBe(false);
-  expect(endState[todolistID2][2].status).toBe(true);
-  expect(endState[todolistID1][2].status).toBe(false);
+  expect(startState[todolistID2][2].status).toBe(0);
+  expect(endState[todolistID2][2].status).toBe(1);
+  expect(endState[todolistID1][2].status).toBe(0);
 })
 
 
