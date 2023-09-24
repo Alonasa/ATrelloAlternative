@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import s from './Todolist.module.css';
-import {AddItemForm} from '../components/AddItemForm';
-import {EditableSpan} from '../components/EditableSpan';
+import {AddItemForm} from '../components/AddItemForm/AddItemForm';
+import {EditableSpan} from '../components/EditableSpan/EditableSpan';
 import {Button} from '@mui/material';
 import {Clear} from '@mui/icons-material';
 import Grid from '@mui/material/Grid';

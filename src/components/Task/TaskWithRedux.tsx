@@ -1,7 +1,7 @@
 import React, {ChangeEvent, memo, useCallback} from 'react';
 import s from '../../todolist/Todolist.module.css';
 import {Button, Checkbox} from '@mui/material';
-import {EditableSpan} from '../EditableSpan';
+import {EditableSpan} from '../EditableSpan/EditableSpan';
 import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
 import {
