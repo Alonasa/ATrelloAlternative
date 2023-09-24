@@ -12,7 +12,12 @@ import {
   UpdateTaskModelType
 } from '../../../api/todolists-api';
 import {AppRootStateType} from '../../../app/store';
-import {SetAppStatusACType} from '../../../app/app-reducer';
+import {
+  setAppErrorAC,
+  SetAppErrorACType,
+  setAppStatusAC,
+  SetAppStatusACType
+} from '../../../app/app-reducer';
 
 const initialState: TasksType = {
   // ['todolistID1']: [
@@ -102,6 +107,7 @@ type ActionsType =
   | SetTodolistACType
   | ReturnType<typeof GetTasksAC>
   | SetAppStatusACType
+  | SetAppErrorACType
 
 type AddTaskACType = ReturnType<typeof AddTaskAC>
 type RemoveTaskACType = ReturnType<typeof RemoveTaskAC>
@@ -171,7 +177,17 @@ export const RemoveTaskTC = (tlId: string, taskId: string) => (dispatch: Dispatc
 export const AddTaskTC = (tlId: string, title: string) => (dispatch: Dispatch) => {
   TodolistsAPI.createTask(tlId, title)
 	.then(res => {
-	  dispatch(AddTaskAC(res.data.data.item, tlId))
+	  if (res.data.resultCode === 0) {
+		dispatch(AddTaskAC(res.data.data.item, tlId))
+		dispatch(setAppStatusAC('succeeded'))
+	  } else {
+		const error = res.data.messages[0]
+		if (error) {
+		  dispatch(setAppErrorAC(error))
+		}else {
+		  dispatch(setAppStatusAC('failed'))
+		}
+	  }
 	})
 }
 
