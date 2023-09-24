@@ -1,4 +1,4 @@
-import {TasksType} from '../../../todolist/Todolist1';
+import {TasksType} from '../../../todolist/Todolist';
 import {
   AddTodolistACType,
   RemoveTodolistACType,
@@ -185,7 +185,8 @@ export const UpdateTaskTC = (tlId: string, id: string, status: TaskStatuses) => 
 	  status: status,
 	  priority: task.priority,
 	  startDate: task.startDate,
-	  deadline: task.deadline
+	  deadline: task.deadline,
+	  todoListId: task.todoListId
 	}
 	
 	TodolistsAPI.updateTask(tlId, id, model)
@@ -205,7 +206,8 @@ export const ChangeTaskTitleTC = (tlId: string, id: string, newTitle: string) =>
 	  status: task.status,
 	  priority: task.priority,
 	  startDate: task.startDate,
-	  deadline: task.deadline
+	  deadline: task.deadline,
+	  todoListId: task.todoListId
 	}
 	
 	TodolistsAPI.updateTask(tlId, id, model)

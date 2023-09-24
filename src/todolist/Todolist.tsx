@@ -17,7 +17,7 @@ import {
   GetTasksTC
 } from '../state/reducers/TasksReducers/TasksReducer';
 import {ButtonWithMemo} from '../components/ButtonWithMemo/ButtonWithMemo';
-import {TaskWithRedux} from '../components/Task/TaskWithRedux';
+import {Task} from '../components/Task/Task';
 import {TaskType} from '../api/todolists-api';
 
 type PropsType = {
@@ -38,10 +38,11 @@ export type TodolistsType = {
 
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
-export const Todolist1 = (props: PropsType) => {
+export const Todolist = (props: PropsType) => {
   const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
   const dispatch = useAppDispatch();
   const {id: tlId, title, filter} = todolists;
+  
   
   useEffect(() => {
 	dispatch(GetTasksTC(tlId))
@@ -88,8 +89,8 @@ export const Todolist1 = (props: PropsType) => {
 	  <ul className={s.list}>
 		{tasks?.map(el => {
 		  return (
-			<TaskWithRedux
-			  key={el.id} task={el} tlId={tlId}
+			<Task
+			  key={el.id} task={el} todoListId={tlId}
 			/>
 		  )
 		})}

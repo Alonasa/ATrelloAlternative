@@ -1,5 +1,5 @@
 import React from 'react';
-import {FilterValueType, TodolistsType} from '../../../todolist/Todolist1';
+import {FilterValueType, TodolistsType} from '../../../todolist/Todolist';
 import {v1} from 'uuid';
 import {TodolistsAPI, TodolistType} from '../../../api/todolists-api';
 import {Dispatch} from 'redux';

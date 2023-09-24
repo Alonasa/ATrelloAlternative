@@ -11,8 +11,9 @@ import {
   TodolistDomainType
 } from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {useAppDispatch, useAppSelector} from './store';
-import {FilterValueType, Todolist1} from '../todolist/Todolist1';
+import {FilterValueType, Todolist} from '../todolist/Todolist';
 import {RequestStatusType} from './app-reducer';
+import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 
 let theme = createTheme({
   palette: {
@@ -55,7 +56,7 @@ export type TodolistsType = {
   filter: FilterValueType
 }
 
-function AppWithRedux() {
+function App() {
   const dispatch = useAppDispatch();
   const addTodolist = useCallback((title: string) => {
 	let action = CreateTodolistTC(title);
@@ -81,7 +82,7 @@ function AppWithRedux() {
 			  <Grid key={tl.id} item xs={12} sm={6} md={4}>
 				<Paper elevation={6}
 					   sx={{height: '100%', position: 'relative'}}>
-				  <Todolist1
+				  <Todolist
 					tlId={tl.id}
 				  />
 				</Paper>
@@ -89,9 +90,10 @@ function AppWithRedux() {
 			)
 		  })}
 		</Grid>
+		<ErrorSnackbar/>
 	  </div>
 	</ThemeProvider>
   );
 }
 
-export default AppWithRedux;
+export default App;

@@ -49,6 +49,7 @@ export type UpdateTaskModelType = {
   priority: TaskPriorities
   startDate: string
   deadline: string
+  todoListId: string
 }
 
 type GetTasksResponse = {

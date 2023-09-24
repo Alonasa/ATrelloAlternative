@@ -4,7 +4,7 @@ import React from 'react'; //We are starting
 import ReactDOM from 'react-dom/client'; //Framework for
 // building web applications
 import './index.css';
-import AppWithRedux from './app/AppWithRedux';
+import App from './app/App';
 import {Provider} from 'react-redux';
 import {store} from './app/store'; // import styles
 
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <AppWithRedux/>
+    <App/>
   </Provider>
 );
 

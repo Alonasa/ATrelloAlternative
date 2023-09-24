@@ -5,7 +5,7 @@ import {EditableSpan} from '../EditableSpan/EditableSpan';
 import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
 import {
-  ChangeTaskTitleAC, ChangeTaskTitleTC,
+  ChangeTaskTitleTC,
   RemoveTaskTC,
   UpdateTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
@@ -14,26 +14,26 @@ import {TaskStatuses, TaskType} from '../../api/todolists-api';
 
 type TaskPropsType = {
   task: TaskType
-  tlId: string
+  todoListId: string
 }
 
-export const TaskWithRedux = memo(({task, tlId}: TaskPropsType) => {
+export const Task = memo(({task, todoListId}: TaskPropsType) => {
   const {id, title, status} = task;
   const dispatch = useAppDispatch();
   
   console.log(task)
   
   const onChangeTitleHandler = useCallback((newTitle: string) => {
-	dispatch(ChangeTaskTitleTC(tlId, id, newTitle))
-  }, [tlId, id])
+	dispatch(ChangeTaskTitleTC(todoListId, id, newTitle))
+  }, [todoListId, id])
   
   const changeTaskStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-	dispatch(UpdateTaskTC(tlId, id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New))
-  }, [tlId, id])
+	dispatch(UpdateTaskTC(todoListId, id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New))
+  }, [todoListId, id])
   
   const removeTaskHandler = useCallback((id: string) => {
-	dispatch(RemoveTaskTC(tlId, id))
-  }, [tlId, id])
+	dispatch(RemoveTaskTC(todoListId, id))
+  }, [todoListId, id])
   
   return (
 	<ListItem
