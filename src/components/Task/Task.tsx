@@ -21,8 +21,6 @@ export const Task = memo(({task, todoListId}: TaskPropsType) => {
   const {id, title, status} = task;
   const dispatch = useAppDispatch();
   
-  console.log(task)
-  
   const onChangeTitleHandler = useCallback((newTitle: string) => {
 	dispatch(ChangeTaskTitleTC(todoListId, id, newTitle))
   }, [todoListId, id])
