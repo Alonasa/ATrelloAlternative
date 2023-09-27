@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 
 export type AddItemFormType = {
   addItem: (title: string) => void
+  disabled?: boolean
 }
 
 export const AddItemForm = memo((props: AddItemFormType) => {
@@ -41,10 +42,13 @@ export const AddItemForm = memo((props: AddItemFormType) => {
 				 onKeyPress={onKeyPressHandler}
 				 error={error}
 				 helperText={error ? 'You can\'t add empty task' : undefined}
+				 disabled={props.disabled}
 	  />
 	  <Button
 		sx={{minWidth: 'fit-content'}}
-		color={'info'} onClick={() => addTaskHandler(title)}><AddIcon/></Button>
+		color={'info'} onClick={() => addTaskHandler(title)}
+		disabled={props.disabled}
+	  ><AddIcon/></Button>
 	</Box>
   );
 });

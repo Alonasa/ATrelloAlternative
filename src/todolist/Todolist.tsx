@@ -87,7 +87,7 @@ export const Todolist = (props: PropsType) => {
 		  disabled={props.entityStatus === 'loading'}><Clear/></Button>
 	  </h3>
 	  <div>
-		<AddItemForm addItem={addTask}/>
+		<AddItemForm addItem={addTask} disabled={props.entityStatus === 'loading'}/>
 	  </div>
 	  <ul className={s.list}>
 		{tasks?.map(el => {
