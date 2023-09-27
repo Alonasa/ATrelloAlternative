@@ -4,7 +4,8 @@ import {v1} from 'uuid';
 import {TodolistsAPI, TodolistType} from '../../../api/todolists-api';
 import {Dispatch} from 'redux';
 import {
-  RequestStatusType, setAppErrorAC,
+  RequestStatusType,
+  setAppErrorAC,
   setAppStatusAC,
   SetAppStatusACType
 } from '../../../app/app-reducer';
@@ -51,7 +52,10 @@ export const TodolistsReducer = (state: Array<TodolistDomainType> = initialState
 	  } : tl)
 	}
 	case 'SET-ENTITY-STATUS': {
-	  return state.map(el=> el.id === action.tlId ? {...el, entityStatus: action.status} : el)
+	  return state.map(el => el.id === action.tlId ? {
+		...el,
+		entityStatus: action.status
+	  } : el)
 	}
 	default:
 	  return state
@@ -117,7 +121,7 @@ export const SetTodolistsAC = (todos: TodolistType[]) => {
 }
 
 export const SetTodolistEntityStatusAC = (tlId: string, status: RequestStatusType) => {
-  return {type: 'SET-ENTITY-STATUS', tlId,status} as const
+  return {type: 'SET-ENTITY-STATUS', tlId, status} as const
 }
 
 export const GetTodo = (dispatch: Dispatch) => {
@@ -140,23 +144,27 @@ export const CreateTodolistTC = (title: string) => (dispatch: Dispatch) => {
 
 export const DeleteTodolistTC = (tlId: string) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC('loading'))
-  dispatch(SetTodolistEntityStatusAC(tlId,'loading'))
+  dispatch(SetTodolistEntityStatusAC(tlId, 'loading'))
   TodolistsAPI.deleteTodolist(tlId)
 	.then(res => {
-	  if(res.data.resultCode === 0){
+	  if (res.data.resultCode === 0) {
 		dispatch(RemoveTodolistAC(tlId))
 		dispatch(setAppStatusAC('succeeded'))
-	  }else {
-	    const err = res.data.messages[0]
-		if(err){
+	  } else {
+		const err = res.data.messages[0]
+		if (err) {
 		  dispatch(setAppErrorAC(err))
-		}else {
+		} else {
 		  dispatch(setAppErrorAC('Some Error'))
 		}
 		dispatch(setAppStatusAC('failed'))
+		dispatch(SetTodolistEntityStatusAC(tlId, 'failed'))
 	  }
 	  
-	})
+	}).catch(() => {
+	dispatch(setAppStatusAC('failed'))
+	dispatch(SetTodolistEntityStatusAC(tlId, 'failed'))
+  })
 }
 
 export const ChangeTodolistTitleTC = (tlId: string, newTitle: string) => (dispatch: Dispatch) => {
