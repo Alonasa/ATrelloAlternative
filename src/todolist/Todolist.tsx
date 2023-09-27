@@ -19,9 +19,11 @@ import {
 import {ButtonWithMemo} from '../components/ButtonWithMemo/ButtonWithMemo';
 import {Task} from '../components/Task/Task';
 import {TaskType} from '../api/todolists-api';
+import {RequestStatusType} from '../app/app-reducer';
 
 type PropsType = {
   tlId: string
+  entityStatus: RequestStatusType
 }
 
 export type TasksType = {
@@ -39,7 +41,7 @@ export type TodolistsType = {
 export type FilterValueType = 'All' | 'Active' | 'Completed'
 
 export const Todolist = (props: PropsType) => {
-  const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find(tl => tl.id === props.tlId) as TodolistsType)
+  const todolists: TodolistsType = useSelector<AppRootStateType, TodolistsType>(state => state.todolists.find((tl) => tl.id === props.tlId) as TodolistsType)
   const dispatch = useAppDispatch();
   const {id: tlId, title, filter} = todolists;
   
@@ -81,7 +83,8 @@ export const Todolist = (props: PropsType) => {
 		<Button
 		  sx={{minWidth: 'fit-content'}}
 		  color={'info'}
-		  onClick={() => removeTodolistHandler(tlId)}><Clear/></Button>
+		  onClick={() => removeTodolistHandler(tlId)}
+		  disabled={props.entityStatus === 'loading'}><Clear/></Button>
 	  </h3>
 	  <div>
 		<AddItemForm addItem={addTask}/>

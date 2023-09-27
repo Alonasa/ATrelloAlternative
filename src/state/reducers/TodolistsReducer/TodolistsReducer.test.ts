@@ -24,14 +24,17 @@ beforeEach(() => {
       title: 'What to learn',
       filter: 'All',
       addedDate: '2023-08-17T17:03:14.933',
-      order: -4
+      order: -4,
+      entityStatus: 'idle'
     },
     {
       id: todolistID2,
       title: 'What to buy',
       filter: 'All',
       addedDate: '2023-08-17T17:03:14.933',
-      order: -2
+      order: -2,
+      entityStatus: 'idle'
+  
     },
   ]
 })
