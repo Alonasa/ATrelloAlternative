@@ -83,7 +83,7 @@ function App() {
 				<Paper elevation={6}
 					   sx={{height: '100%', position: 'relative'}}>
 				  <Todolist
-					tlId={tl.id}
+					tlId={tl.id} entityStatus={tl.entityStatus}
 				  />
 				</Paper>
 			  </Grid>

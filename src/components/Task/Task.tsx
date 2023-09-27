@@ -5,7 +5,6 @@ import {EditableSpan} from '../EditableSpan/EditableSpan';
 import {Clear} from '@mui/icons-material';
 import ListItem from '@mui/material/ListItem';
 import {
-  ChangeTaskTitleTC,
   RemoveTaskTC,
   UpdateTaskTC
 } from '../../state/reducers/TasksReducers/TasksReducer';
@@ -21,12 +20,13 @@ export const Task = memo(({task, todoListId}: TaskPropsType) => {
   const {id, title, status} = task;
   const dispatch = useAppDispatch();
   
-  const onChangeTitleHandler = useCallback((newTitle: string) => {
-	dispatch(ChangeTaskTitleTC(todoListId, id, newTitle))
+  const onChangeTitleHandler = useCallback((title: string) => {
+	dispatch(UpdateTaskTC(todoListId, id, {title}))
   }, [todoListId, id])
   
   const changeTaskStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-	dispatch(UpdateTaskTC(todoListId, id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New))
+	const status = e.currentTarget.checked
+	dispatch(UpdateTaskTC(todoListId, id, status ? {status: TaskStatuses.Completed} : {status: TaskStatuses.New}))
   }, [todoListId, id])
   
   const removeTaskHandler = useCallback((id: string) => {
