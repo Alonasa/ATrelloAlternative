@@ -1,7 +1,11 @@
 import React from 'react';
 import {FilterValueType} from '../../../todolist/Todolist';
 import {v1} from 'uuid';
-import {TodolistsAPI, TodolistType} from '../../../api/todolists-api';
+import {
+  TaskStatuses,
+  TodolistsAPI,
+  TodolistType
+} from '../../../api/todolists-api';
 import {Dispatch} from 'redux';
 import {
   RequestStatusType,
@@ -147,7 +151,7 @@ export const DeleteTodolistTC = (tlId: string) => (dispatch: Dispatch) => {
   dispatch(SetTodolistEntityStatusAC(tlId, 'loading'))
   TodolistsAPI.deleteTodolist(tlId)
 	.then(res => {
-	  if (res.data.resultCode === 0) {
+	  if (res.data.resultCode === TaskStatuses.New) {
 		dispatch(RemoveTodolistAC(tlId))
 		dispatch(setAppStatusAC('succeeded'))
 	  } else {
