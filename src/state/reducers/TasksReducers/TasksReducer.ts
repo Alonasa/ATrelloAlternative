@@ -20,7 +20,11 @@ import {
   setAppStatusAC,
   SetAppStatusACType
 } from '../../../app/app-reducer';
-import {handleServerNetworkError} from '../../../utils/error-utils';
+import {
+  handleServerAppError,
+  handleServerNetworkError
+} from '../../../utils/error-utils';
+import {AxiosError} from 'axios';
 
 export type UpdateDomainTaskModelType = {
   title?: string
@@ -29,6 +33,17 @@ export type UpdateDomainTaskModelType = {
   priority?: TaskPriorities
   startDate?: string
   deadline?: string
+}
+
+type ErrorType = {
+  'statusCode': 0,
+  'messages': [
+	{
+	  'message': 'string',
+	  'field': 'string'
+	}
+  ],
+  'error': 'string'
 }
 
 const initialState: TasksType = {}
@@ -147,7 +162,7 @@ export const AddTaskTC = (tlId: string, title: string) => (dispatch: Dispatch<Ac
 		dispatch(AddTaskAC(res.data.data.item, tlId))
 		dispatch(setAppStatusAC('succeeded'))
 	  } else {
-		handleServerNetworkError(dispatch, res.data.messages[0])
+		handleServerAppError(dispatch, res.data)
 	  }
 	})
 	.catch(e => {
@@ -184,8 +199,8 @@ export const UpdateTaskTC = (tlId: string, id: string, domainModel: UpdateDomain
 		  }
 		  dispatch(setAppStatusAC('failed'))
 		}
-	  }).catch(e => {
-	  	handleServerNetworkError(dispatch, e.message)
+	  }).catch((e: AxiosError<ErrorType>) => {
+	  handleServerNetworkError(dispatch, e.message)
 	})
   }
 }
