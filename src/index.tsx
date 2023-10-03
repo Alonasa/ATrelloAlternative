@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom/client'; //Framework for
 import './index.css';
 import App from './app/App';
 import {Provider} from 'react-redux';
-import {store} from './app/store'; // import styles
+import {store} from './app/store';
+import {BrowserRouter} from 'react-router-dom'; // import styles
 
 // React DOM will render App element inside element with id root
 const root = ReactDOM.createRoot(
@@ -14,7 +15,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <Provider store={store}>
-    <App/>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </Provider>
 );
 
