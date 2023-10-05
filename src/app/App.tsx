@@ -1,22 +1,16 @@
-import React, {useCallback, useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import {AddItemForm} from '../components/AddItemForm/AddItemForm';
 import {createTheme, LinearProgress, ThemeProvider} from '@mui/material';
-import {Menu} from '../components/Menu/Menu';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import {
-  CreateTodolistTC,
-  GetTodo,
-  TodolistDomainType
-} from '../state/reducers/TodolistsReducer/TodolistsReducer';
-import {useAppDispatch, useAppSelector} from './store';
-import {FilterValueType, Todolist} from '../todolist/Todolist';
+import {Menu} from '../components/Menu/Menu';
+import {useAppSelector} from './store';
+import {FilterValueType} from '../todolist/Todolist';
 import {RequestStatusType} from './app-reducer';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {Login} from '../features/login/Login';
-import { Routes, Route } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {TodolistList} from '../todolist/TodolistList';
+import {ErrorPage} from '../components/ErrorPage/ErrorPage';
 
 
 let theme = createTheme({
@@ -61,18 +55,22 @@ export type TodolistsType = {
 }
 
 function App() {
-  let status = useAppSelector<RequestStatusType>((state)=> state.app.status);
+  let status = useAppSelector<RequestStatusType>((state) => state.app.status);
   
   return (
 	<ThemeProvider theme={theme}>
 	  <Menu title={'Todolists'}/>
-	  {status=== "loading" && <LinearProgress/>}
+	  {status === 'loading' && <LinearProgress/>}
 	  <div className="App" color={'info'}>
+		<Grid container spacing={4}>
 		  <Routes>
 			<Route path={'/'} element={<TodolistList/>}/>
 			<Route path={'/login'} element={<Login/>}/>
+			<Route path={'404'} element={<ErrorPage/>}/>
+			<Route path={'*'} element={<Navigate to={'404'}/>}/>
 		  </Routes>
-		<ErrorSnackbar/>
+		  <ErrorSnackbar/>
+		</Grid>
 	  </div>
 	</ThemeProvider>
   );

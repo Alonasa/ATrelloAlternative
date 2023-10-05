@@ -4,7 +4,8 @@ import Paper from '@mui/material/Paper';
 import {Todolist} from './Todolist';
 import {useAppDispatch, useAppSelector} from '../app/store';
 import {
-  CreateTodolistTC, GetTodo,
+  CreateTodolistTC,
+  GetTodo,
   TodolistDomainType
 } from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {AddItemForm} from '../components/AddItemForm/AddItemForm';
@@ -23,7 +24,7 @@ export const TodolistList = () => {
   
   
   return (
-	<Grid container spacing={4}>
+	<>
 	  <Grid item xs={12} sm={12} md={12}>
 		<AddItemForm addItem={addTodolist}/>
 	  </Grid>
@@ -39,6 +40,6 @@ export const TodolistList = () => {
 		  </Grid>
 		)
 	  })}
-	</Grid>
+	</>
   );
 };
