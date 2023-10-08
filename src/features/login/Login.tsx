@@ -29,10 +29,15 @@ export const Login = () => {
 	  } else if (!regex.test(values.email)) {
 		errors.email = 'Invalid email address'
 	  }
+	  if (!values.password) {
+		errors.password = 'Required';
+	  } else if (values.password.length < 5) {
+		errors.password = 'Invalid password'
+	  }
 	  return errors
 	},
 	onSubmit: values => {
-	  alert(JSON.stringify(values, null, 2))
+	  alert(JSON.stringify(values, null, 2));
 	},
   });
   const res = Object.values(formik.errors)
@@ -54,20 +59,17 @@ export const Login = () => {
 		  <FormGroup>
 			<TextField label="Email"
 					   margin="normal"
-					   name={'email'}
-					   onChange={formik.handleChange}
-					   value={formik.values.email}/>
-			{formik.errors.email && <span style={{color: '#965bef'}}>{formik.errors.email}</span>}
+			  {...formik.getFieldProps('email')}
+			/>
+			{formik.touched.email && formik.errors.email && <span style={{color: '#965bef'}}>{formik.errors.email}</span>}
 			<TextField type="password" label="Password"
 					   margin="normal"
-					   name={'password'}
-					   onChange={formik.handleChange}
-					   value={formik.values.password}
+					   {...formik.getFieldProps('password')}
 			/>
+			{formik.touched.password && formik.errors.password && <span style={{color: '#965bef'}}>{formik.errors.password}</span>}
+		 
 			<FormControlLabel label={'Remember me'}
-							  control={<Checkbox name={'rememberMe'}
-												 onChange={formik.handleChange}
-												 value={formik.values.rememberMe}/>}/>
+							  control={<Checkbox {...formik.getFieldProps('rememberMe')}/>}/>
 			<Button type={'submit'} variant={'contained'} color={'primary'} disabled={!!res.length}>
 			  Login
 			</Button>
