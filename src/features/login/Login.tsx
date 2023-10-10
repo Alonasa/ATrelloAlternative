@@ -67,7 +67,7 @@ export const Login = () => {
 					   {...formik.getFieldProps('password')}
 			/>
 			{formik.touched.password && formik.errors.password && <span style={{color: '#965bef'}}>{formik.errors.password}</span>}
-		 
+	 	
 			<FormControlLabel label={'Remember me'}
 							  control={<Checkbox {...formik.getFieldProps('rememberMe')}/>}/>
 			<Button type={'submit'} variant={'contained'} color={'primary'} disabled={!!res.length}>
