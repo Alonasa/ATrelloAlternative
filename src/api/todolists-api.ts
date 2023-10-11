@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
+import {LoginDataType} from '../features/login/Login';
 
 export type TodolistType = {
   id: string
@@ -72,8 +73,8 @@ export const instance = axios.create({
 })
 
 export const authAPI = {
-  login(loginData: any){
-      return instance.post<ResponseType<{userId: number}>, AxiosResponse<ResponseType<{userId: number}>>, any > ('auth/login', {loginData});
+  login(loginData: LoginDataType){
+      return instance.post<ResponseType<{userId: number}>, AxiosResponse<ResponseType<{userId: number}>>, LoginDataType> ('auth/login', loginData);
   }
 }
 

@@ -4,6 +4,12 @@ import {
   SetAppStatusACType
 } from '../../app/app-reducer';
 import {Dispatch} from 'redux';
+import {authAPI} from '../../api/todolists-api';
+import {
+  handleServerAppError,
+  handleServerNetworkError
+} from '../../utils/error-utils';
+import {LoginDataType} from './Login';
 
 const initialState = {
   isLoggedIn: false
@@ -16,7 +22,7 @@ type ActionsType =
   | SetAppStatusACType
   | SetAppErrorACType
 
-export const authReducer = (state: InitialStateType, action: ActionsType): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
 	case 'login/SET-IS-LOGGED-IN':
 	  return {...state, isLoggedIn: action.value}
@@ -30,6 +36,17 @@ export const setIsLoggedInAC = (value: boolean) => ({
   value
 } as const)
 
-export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
+export const loginTC = (data: LoginDataType) => async (dispatch: Dispatch<ActionsType>) => {
   dispatch(setAppStatusAC('loading'))
+  try{
+    const result = await authAPI.login(data)
+	if(result.data.resultCode == 0){
+	  dispatch(setIsLoggedInAC(true))
+	  dispatch(setAppStatusAC('succeeded'))
+	}else{
+	  handleServerAppError(dispatch, result.data)
+	}
+  }catch (e) {
+	handleServerNetworkError(dispatch, e as string)
+  }
 }

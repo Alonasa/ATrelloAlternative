@@ -8,13 +8,24 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
+import {useAppDispatch, useAppSelector} from '../../app/store';
+import { loginTC} from './auth-reducer';
+import {Navigate} from 'react-router-dom';
 
 type  FormikErrorType = {
   email?: string,
   password?: string
 }
 
+export type LoginDataType = {
+  email: string,
+  password: string
+  rememberMe: boolean
+}
+
 export const Login = () => {
+  const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
   const formik = useFormik({
 	initialValues: {
 	  email: '',
@@ -37,10 +48,15 @@ export const Login = () => {
 	  return errors
 	},
 	onSubmit: values => {
-	  alert(JSON.stringify(values, null, 2));
+	  dispatch(loginTC(values))
+	  formik.resetForm()
 	},
   });
   const res = Object.values(formik.errors)
+  
+  if (isLoggedIn) {
+  return <Navigate to={'/'}/>
+  }
   
   return <Grid container justifyContent={'center'}>
 	<Grid item justifyContent={'center'}>
@@ -59,18 +75,22 @@ export const Login = () => {
 		  <FormGroup>
 			<TextField label="Email"
 					   margin="normal"
-			  {...formik.getFieldProps('email')}
+					   {...formik.getFieldProps('email')}
 			/>
-			{formik.touched.email && formik.errors.email && <span style={{color: '#965bef'}}>{formik.errors.email}</span>}
+			{formik.touched.email && formik.errors.email &&
+            <span style={{color: '#965bef'}}>{formik.errors.email}</span>}
 			<TextField type="password" label="Password"
 					   margin="normal"
 					   {...formik.getFieldProps('password')}
 			/>
-			{formik.touched.password && formik.errors.password && <span style={{color: '#965bef'}}>{formik.errors.password}</span>}
-	 	
+			{formik.touched.password && formik.errors.password &&
+            <span style={{color: '#965bef'}}>{formik.errors.password}</span>}
+			
 			<FormControlLabel label={'Remember me'}
-							  control={<Checkbox {...formik.getFieldProps('rememberMe')}/>}/>
-			<Button type={'submit'} variant={'contained'} color={'primary'} disabled={!!res.length}>
+							  control={
+								<Checkbox {...formik.getFieldProps('rememberMe')}/>}/>
+			<Button type={'submit'} variant={'contained'} color={'primary'}
+					disabled={!!res.length}>
 			  Login
 			</Button>
 		  </FormGroup>
