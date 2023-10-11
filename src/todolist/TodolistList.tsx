@@ -9,19 +9,26 @@ import {
   TodolistDomainType
 } from '../state/reducers/TodolistsReducer/TodolistsReducer';
 import {AddItemForm} from '../components/AddItemForm/AddItemForm';
+import {Navigate} from 'react-router-dom';
 
 export const TodolistList = () => {
   const dispatch = useAppDispatch();
   let todolists = useAppSelector<Array<TodolistDomainType>>(state => state.todolists);
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
   
   const addTodolist = useCallback((title: string) => {
 	let action = CreateTodolistTC(title);
 	dispatch(action);
   }, [dispatch])
+  
   useEffect(() => {
+    if(!isLoggedIn) return
 	dispatch(GetTodo)
   }, [])
   
+  if (!isLoggedIn) {
+	return <Navigate to={'/login'}/>
+  }
   
   return (
 	<>

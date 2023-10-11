@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from 'formik';
 import {useAppDispatch, useAppSelector} from '../../app/store';
-import { loginTC} from './auth-reducer';
+import {loginTC} from './auth-reducer';
 import {Navigate} from 'react-router-dom';
 
 type  FormikErrorType = {
@@ -55,7 +55,7 @@ export const Login = () => {
   const res = Object.values(formik.errors)
   
   if (isLoggedIn) {
-  return <Navigate to={'/'}/>
+	return <Navigate to={'/'}/>
   }
   
   return <Grid container justifyContent={'center'}>

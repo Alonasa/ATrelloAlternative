@@ -40,13 +40,29 @@ export const loginTC = (data: LoginDataType) => async (dispatch: Dispatch<Action
   dispatch(setAppStatusAC('loading'))
   try{
     const result = await authAPI.login(data)
-	if(result.data.resultCode == 0){
+	if(result.data.resultCode === 0){
 	  dispatch(setIsLoggedInAC(true))
 	  dispatch(setAppStatusAC('succeeded'))
 	}else{
 	  handleServerAppError(dispatch, result.data)
 	}
   }catch (e) {
+	handleServerNetworkError(dispatch, e as string)
+  }
+}
+
+
+export const meTC = () => async (dispatch: Dispatch<ActionsType>) => {
+  dispatch(setAppStatusAC('loading'))
+  try{
+	const result = await authAPI.me()
+	if(result.data.resultCode === 0){
+	  dispatch(setIsLoggedInAC(true))
+	  dispatch(setAppStatusAC('succeeded'))
+	}else{
+	  handleServerAppError(dispatch, result.data)
+	}
+  }	catch (e) {
 	handleServerNetworkError(dispatch, e as string)
   }
 }

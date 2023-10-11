@@ -58,6 +58,13 @@ export type UpdateTaskModelType = {
   deadline: string
 }
 
+type userType = {
+  id: number
+  email: string
+  login: string
+}
+
+
 type GetTasksResponse = {
   error: string | null
   totalCount: number
@@ -73,8 +80,11 @@ export const instance = axios.create({
 })
 
 export const authAPI = {
-  login(loginData: LoginDataType){
-      return instance.post<ResponseType<{userId: number}>, AxiosResponse<ResponseType<{userId: number}>>, LoginDataType> ('auth/login', loginData);
+  me() {
+	return instance.get<ResponseType<userType>, AxiosResponse<ResponseType<userType>>>('auth/me');
+  },
+  login(loginData: LoginDataType) {
+	return instance.post<ResponseType<{ userId: number }>, AxiosResponse<ResponseType<{ userId: number }>>, LoginDataType>('auth/login', loginData);
   }
 }
 
