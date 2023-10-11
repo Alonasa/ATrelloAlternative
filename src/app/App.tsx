@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {createTheme, LinearProgress, ThemeProvider} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import {Menu} from '../components/Menu/Menu';
-import {useAppSelector} from './store';
+import {useAppDispatch, useAppSelector} from './store';
 import {FilterValueType} from '../todolist/Todolist';
 import {RequestStatusType} from './app-reducer';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
@@ -11,6 +11,7 @@ import {Login} from '../features/login/Login';
 import {Navigate, Route, Routes} from 'react-router-dom';
 import {TodolistList} from '../todolist/TodolistList';
 import {ErrorPage} from '../components/ErrorPage/ErrorPage';
+import {meTC} from '../features/login/auth-reducer';
 
 
 let theme = createTheme({
@@ -56,6 +57,11 @@ export type TodolistsType = {
 
 function App() {
   let status = useAppSelector<RequestStatusType>((state) => state.app.status);
+  const dispatch = useAppDispatch()
+  
+  useEffect(()=>{
+    dispatch(meTC())
+  },[])
   
   return (
 	<ThemeProvider theme={theme}>

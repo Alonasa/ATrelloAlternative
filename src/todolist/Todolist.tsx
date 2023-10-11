@@ -6,7 +6,7 @@ import {Button} from '@mui/material';
 import {Clear} from '@mui/icons-material';
 import Grid from '@mui/material/Grid';
 import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from '../app/store';
+import {AppRootStateType, useAppDispatch, useAppSelector} from '../app/store';
 import {
   ChangeTodolistFilterAC,
   ChangeTodolistTitleAC, ChangeTodolistTitleTC, DeleteTodolistTC,
