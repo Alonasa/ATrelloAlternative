@@ -1,6 +1,11 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {createTheme, LinearProgress, ThemeProvider} from '@mui/material';
+import {
+  CircularProgress,
+  createTheme,
+  LinearProgress,
+  ThemeProvider
+} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import {Menu} from '../components/Menu/Menu';
 import {useAppDispatch, useAppSelector} from './store';
@@ -57,11 +62,19 @@ export type TodolistsType = {
 
 function App() {
   let status = useAppSelector<RequestStatusType>((state) => state.app.status);
+  let isInitialized = useAppSelector<boolean>((state) => state.app.isInitialized);
   const dispatch = useAppDispatch()
   
   useEffect(()=>{
     dispatch(meTC())
   },[])
+  
+  if (!isInitialized) {
+  	return <div style={{position: 'fixed', top:'30%', textAlign: 'center', width: '100%'}}>
+	  <CircularProgress/>
+	  
+	</div>
+  }
   
   return (
 	<ThemeProvider theme={theme}>

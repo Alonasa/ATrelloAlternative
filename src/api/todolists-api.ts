@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
 import {LoginDataType} from '../features/login/Login';
+import {number} from 'prop-types';
 
 export type TodolistType = {
   id: string
@@ -85,6 +86,9 @@ export const authAPI = {
   },
   login(loginData: LoginDataType) {
 	return instance.post<ResponseType<{ userId: number }>, AxiosResponse<ResponseType<{ userId: number }>>, LoginDataType>('auth/login', loginData);
+  },
+  logout(){
+    return instance.delete<ResponseType>('auth/login');
   }
 }
 
