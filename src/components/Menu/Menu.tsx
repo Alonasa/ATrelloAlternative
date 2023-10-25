@@ -6,14 +6,22 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Navigate } from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../app/store';
+import { logOutTC } from '../../features/login/auth-reducer';
 
 type MenuType = {
   title: string
 }
 
 export const Menu = (props: MenuType) => {
+  let isLoggedIn = useAppSelector<boolean>((state: any) => state.app.isLoggedIn);
   let {title} = props;
+  const dispatch = useAppDispatch()
+  
+  const logOutHandler = () => {
+    dispatch(logOutTC())
+  }
+  
   return (
 	<Box sx={{flexGrow: 1}}>
 	  <AppBar position="static">
@@ -26,7 +34,7 @@ export const Menu = (props: MenuType) => {
 			{title}
 		  </Typography>
 		  <Typography variant="h6" color="inherit" component="div">
-			<Button variant={'text'} onClick={()=><Navigate to={'/login'}/>} color='inherit'>Login</Button>
+			{isLoggedIn && <Button variant={'text'} onClick={logOutHandler} color='inherit'>LogOut</Button>}
 		  </Typography>
 		</Toolbar>
 	  </AppBar>
