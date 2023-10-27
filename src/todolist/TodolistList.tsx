@@ -2,13 +2,13 @@ import React, { useCallback, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Todolist } from "./Todolist";
-import { useAppDispatch, useAppSelector } from "../app/store";
+import { useAppDispatch, useAppSelector } from 'app/store';
 import {
   CreateTodolistTC,
   GetTodo,
   TodolistDomainType,
-} from "../state/reducers/TodolistsReducer/TodolistsReducer";
-import { AddItemForm } from "../components/AddItemForm/AddItemForm";
+} from 'state/reducers/TodolistsReducer/TodolistsReducer';
+import { AddItemForm } from 'components/AddItemForm/AddItemForm';
 import { Navigate } from "react-router-dom";
 
 export const TodolistList = () => {

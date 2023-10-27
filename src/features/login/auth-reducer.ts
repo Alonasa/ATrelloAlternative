@@ -4,13 +4,13 @@ import {
   SetAppStatusACType,
   setInitializedAC,
   SetInitializedACType,
-} from "../../app/app-reducer";
+} from 'app/app-reducer';
 import { Dispatch } from "redux";
-import { authAPI } from "../../api/todolists-api";
+import { authAPI } from 'api/todolists-api';
 import {
   handleServerAppError,
   handleServerNetworkError,
-} from "../../utils/error-utils";
+} from 'utils/error-utils';
 import { LoginDataType } from "./Login";
 
 const initialState = {

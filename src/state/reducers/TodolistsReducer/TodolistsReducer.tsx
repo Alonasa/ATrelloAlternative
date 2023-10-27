@@ -1,18 +1,18 @@
 import React from "react";
-import { FilterValueType } from "../../../todolist/Todolist";
+import { FilterValueType } from 'todolist/Todolist';
 import { v1 } from "uuid";
 import {
   TaskStatuses,
   TodolistsAPI,
   TodolistType,
-} from "../../../api/todolists-api";
+} from 'api/todolists-api';
 import { Dispatch } from "redux";
 import {
   RequestStatusType,
   setAppErrorAC,
   setAppStatusAC,
   SetAppStatusACType,
-} from "../../../app/app-reducer";
+} from 'app/app-reducer';
 
 const initialState: Array<TodolistDomainType> = [];
 

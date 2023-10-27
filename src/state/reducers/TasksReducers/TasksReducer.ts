@@ -1,4 +1,4 @@
-import { TasksType } from "../../../todolist/Todolist";
+import { TasksType } from 'todolist/Todolist';
 import {
   AddTodolistACType,
   RemoveTodolistACType,
@@ -12,18 +12,18 @@ import {
   TaskType,
   TodolistsAPI,
   UpdateTaskModelType,
-} from "../../../api/todolists-api";
-import { AppRootStateType } from "../../../app/store";
+} from 'api/todolists-api';
+import { AppRootStateType } from 'app/store';
 import {
   setAppErrorAC,
   SetAppErrorACType,
   setAppStatusAC,
   SetAppStatusACType,
-} from "../../../app/app-reducer";
+} from 'app/app-reducer';
 import {
   handleServerAppError,
   handleServerNetworkError,
-} from "../../../utils/error-utils";
+} from 'utils/error-utils';
 import { AxiosError } from "axios";
 
 export type UpdateDomainTaskModelType = {

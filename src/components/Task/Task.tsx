@@ -7,9 +7,9 @@ import ListItem from "@mui/material/ListItem";
 import {
   RemoveTaskTC,
   UpdateTaskTC,
-} from "../../state/reducers/TasksReducers/TasksReducer";
-import { useAppDispatch } from "../../app/store";
-import { TaskStatuses, TaskType } from "../../api/todolists-api";
+} from 'state/reducers/TasksReducers/TasksReducer';
+import { useAppDispatch } from 'app/store';
+import { TaskStatuses, TaskType } from 'api/todolists-api';
 
 type TaskPropsType = {
   task: TaskType;

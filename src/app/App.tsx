@@ -7,16 +7,16 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Menu } from "../components/Menu/Menu";
+import { Menu } from 'components/Menu/Menu';
 import { useAppDispatch, useAppSelector } from "./store";
-import { FilterValueType } from "../todolist/Todolist";
+import { FilterValueType } from 'todolist/Todolist';
 import { RequestStatusType } from "./app-reducer";
-import { ErrorSnackbar } from "../components/ErrorSnackbar/ErrorSnackbar";
-import { Login } from "../features/login/Login";
+import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
+import { Login } from 'features/login/Login';
 import { Navigate, Route, Routes } from "react-router-dom";
-import { TodolistList } from "../todolist/TodolistList";
-import { ErrorPage } from "../components/ErrorPage/ErrorPage";
-import { meTC } from "../features/login/auth-reducer";
+import { TodolistList } from 'todolist/TodolistList';
+import { ErrorPage } from 'components/ErrorPage/ErrorPage';
+import { meTC } from 'features/login/auth-reducer';
 
 let theme = createTheme({
   palette: {

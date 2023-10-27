@@ -6,8 +6,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useAppDispatch, useAppSelector } from "../../app/store";
-import { logOutTC } from "../../features/login/auth-reducer";
+import { useAppDispatch, useAppSelector } from 'app/store';
+import { logOutTC } from 'features/login/auth-reducer';
 
 type MenuType = {
   title: string;
