@@ -1,86 +1,92 @@
 import {
   SetAppErrorACType,
   setAppStatusAC,
-  SetAppStatusACType, setInitializedAC, SetInitializedACType
-} from '../../app/app-reducer';
-import {Dispatch} from 'redux';
-import {authAPI} from '../../api/todolists-api';
+  SetAppStatusACType,
+  setInitializedAC,
+  SetInitializedACType,
+} from "../../app/app-reducer";
+import { Dispatch } from "redux";
+import { authAPI } from "../../api/todolists-api";
 import {
   handleServerAppError,
-  handleServerNetworkError
-} from '../../utils/error-utils';
-import {LoginDataType} from './Login';
+  handleServerNetworkError,
+} from "../../utils/error-utils";
+import { LoginDataType } from "./Login";
 
 const initialState = {
-  isLoggedIn: false
-}
+  isLoggedIn: false,
+};
 
-type InitialStateType = typeof initialState
+type InitialStateType = typeof initialState;
 
 type ActionsType =
-  ReturnType<typeof setIsLoggedInAC>
+  | ReturnType<typeof setIsLoggedInAC>
   | SetAppStatusACType
   | SetAppErrorACType
-  | SetInitializedACType
+  | SetInitializedACType;
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+export const authReducer = (
+  state: InitialStateType = initialState,
+  action: ActionsType,
+): InitialStateType => {
   switch (action.type) {
-	case 'login/SET-IS-LOGGED-IN':
-	  return {...state, isLoggedIn: action.value}
-	default:
-	  return state
+    case "login/SET-IS-LOGGED-IN":
+      return { ...state, isLoggedIn: action.value };
+    default:
+      return state;
   }
-}
+};
 
-export const setIsLoggedInAC = (value: boolean) => ({
-  type: 'login/SET-IS-LOGGED-IN',
-  value
-} as const)
+export const setIsLoggedInAC = (value: boolean) =>
+  ({
+    type: "login/SET-IS-LOGGED-IN",
+    value,
+  }) as const;
 
-export const loginTC = (data: LoginDataType) => async (dispatch: Dispatch<ActionsType>) => {
-  dispatch(setAppStatusAC('loading'))
-  try{
-    const result = await authAPI.login(data)
-	if(result.data.resultCode === 0){
-	  dispatch(setIsLoggedInAC(true))
-	  dispatch(setAppStatusAC('succeeded'))
-	}else{
-	  handleServerAppError(dispatch, result.data)
-	}
-  }catch (e) {
-	handleServerNetworkError(dispatch, e as string)
-  }
-}
+export const loginTC =
+  (data: LoginDataType) => async (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setAppStatusAC("loading"));
+    try {
+      const result = await authAPI.login(data);
+      if (result.data.resultCode === 0) {
+        dispatch(setIsLoggedInAC(true));
+        dispatch(setAppStatusAC("succeeded"));
+      } else {
+        handleServerAppError(dispatch, result.data);
+      }
+    } catch (e) {
+      handleServerNetworkError(dispatch, e as string);
+    }
+  };
 
 export const logOutTC = () => async (dispatch: Dispatch<ActionsType>) => {
-  dispatch(setAppStatusAC('loading'))
-  try{
-	const result = await authAPI.logout()
-	if(result.data.resultCode === 0){
-	  dispatch(setIsLoggedInAC(false))
-	  dispatch(setAppStatusAC('succeeded'))
-	}else{
-	  handleServerAppError(dispatch, result.data)
-	}
-  }catch (e) {
-	handleServerNetworkError(dispatch, e as string)
+  dispatch(setAppStatusAC("loading"));
+  try {
+    const result = await authAPI.logout();
+    if (result.data.resultCode === 0) {
+      dispatch(setIsLoggedInAC(false));
+      dispatch(setAppStatusAC("succeeded"));
+    } else {
+      handleServerAppError(dispatch, result.data);
+    }
+  } catch (e) {
+    handleServerNetworkError(dispatch, e as string);
   }
-}
+};
 
 export const meTC = () => async (dispatch: Dispatch<ActionsType>) => {
-  dispatch(setAppStatusAC('loading'))
-  try{
-	const result = await authAPI.me()
-	if(result.data.resultCode === 0){
-	  dispatch(setIsLoggedInAC(true))
-	  dispatch(setAppStatusAC('succeeded'))
-	}else{
-	  handleServerAppError(dispatch, result.data)
-	}
-  }	catch (e) {
-	handleServerNetworkError(dispatch, e as string)
+  dispatch(setAppStatusAC("loading"));
+  try {
+    const result = await authAPI.me();
+    if (result.data.resultCode === 0) {
+      dispatch(setIsLoggedInAC(true));
+      dispatch(setAppStatusAC("succeeded"));
+    } else {
+      handleServerAppError(dispatch, result.data);
+    }
+  } catch (e) {
+    handleServerNetworkError(dispatch, e as string);
+  } finally {
+    dispatch(setInitializedAC(true));
   }
-  finally {
-	dispatch(setInitializedAC(true))
-  }
-}
+};

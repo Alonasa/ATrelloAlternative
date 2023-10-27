@@ -1,60 +1,60 @@
 .error {
-	animation: shaking 5s;
-	animation-iteration-count: infinite;
+  animation: shaking 5s;
+  animation-iteration-count: infinite;
 
-    font-weight: bold;
-    color: purple;
+  font-weight: bold;
+  color: purple;
 }
 
 @keyframes shaking {
-    0% {
-        transform: translateX(0)
-    }
-    25% {
-        transform: translateX(5px)
-    }
-    50% {
-        transform: translateX(-5px)
-    }
-    75% {
-        transform: translateX(5px)
-    }
-    100% {
-        transform: translateX(0)
-    }
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(5px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .button {
-    padding: 10px 15px;
-    border-radius: 10%;
-    background-color: purple;
-    color: antiquewhite;
-    border: 2px solid antiquewhite;
+  padding: 10px 15px;
+  border-radius: 10%;
+  background-color: purple;
+  color: antiquewhite;
+  border: 2px solid antiquewhite;
 }
 
 .active {
-    background-color: antiquewhite;
-    border: 2px solid purple;
-    color: purple;
+  background-color: antiquewhite;
+  border: 2px solid purple;
+  color: purple;
 }
 
 .list {
-    padding: 0;
-    margin-bottom: 8vh;
-    list-style: none;
+  padding: 0;
+  margin-bottom: 8vh;
+  list-style: none;
 }
 
 .finished {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .title {
-    margin-top: 0;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .todolist {
-    padding: 1em;
-    box-sizing: border-box;
+  padding: 1em;
+  box-sizing: border-box;
 }
