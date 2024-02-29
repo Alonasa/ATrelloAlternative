@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import {useAppDispatch, useAppSelector} from 'app/store';
-import {loginTC, logOutTC} from 'features/login/auth-reducer';
+import {logOutTC} from 'features/login/auth-reducer';
 import {Menu, MenuItem} from '@mui/material';
 import {NavLink} from 'react-router-dom';
 
