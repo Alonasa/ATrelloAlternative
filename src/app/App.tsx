@@ -1,36 +1,36 @@
-import React, { useEffect } from "react";
-import "./App.css";
+import React, {useEffect} from 'react';
+import './App.css';
 import {
   CircularProgress,
   createTheme,
   LinearProgress,
   ThemeProvider,
-} from "@mui/material";
-import Grid from "@mui/material/Grid";
-import { Menu } from 'components/Menu/Menu';
-import { useAppDispatch, useAppSelector } from "./store";
-import { FilterValueType } from 'todolist/Todolist';
-import { RequestStatusType } from "./app-reducer";
-import { ErrorSnackbar } from 'components/ErrorSnackbar/ErrorSnackbar';
-import { Login } from 'features/login/Login';
-import { Navigate, Route, Routes } from "react-router-dom";
-import { TodolistList } from 'todolist/TodolistList';
-import { ErrorPage } from 'components/ErrorPage/ErrorPage';
-import { meTC } from 'features/login/auth-reducer';
+} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import {MainMenu} from 'components/MainMenu/MainMenu';
+import {useAppDispatch, useAppSelector} from './store';
+import {FilterValueType} from 'todolist/Todolist';
+import {RequestStatusType} from './app-reducer';
+import {ErrorSnackbar} from 'components/ErrorSnackbar/ErrorSnackbar';
+import {Login} from 'features/login/Login';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import {TodolistList} from 'todolist/TodolistList';
+import {ErrorPage} from 'components/ErrorPage/ErrorPage';
+import {meTC} from 'features/login/auth-reducer';
 
 let theme = createTheme({
   palette: {
     primary: {
-      main: "#405194",
+      main: '#405194',
     },
     secondary: {
-      main: "#c01460",
+      main: '#c01460',
     },
     info: {
-      main: "#867ae1",
+      main: '#867ae1',
     },
     error: {
-      main: "#d43c7a",
+      main: '#d43c7a',
     },
   },
 });
@@ -39,15 +39,15 @@ theme = createTheme(theme, {
   palette: {
     brown: theme.palette.augmentColor({
       color: {
-        main: "#d49643",
+        main: '#d49643',
       },
-      name: "brown",
+      name: 'brown',
     }),
     rose: theme.palette.augmentColor({
       color: {
-        main: "#bd627f",
+        main: '#bd627f',
       },
-      name: "rose",
+      name: 'rose',
     }),
   },
 });
@@ -64,7 +64,7 @@ function App() {
     (state) => state.app.isInitialized,
   );
   const dispatch = useAppDispatch();
-
+  
   useEffect(() => {
     dispatch(meTC());
   }, []);
@@ -73,30 +73,30 @@ function App() {
     return (
       <div
         style={{
-          position: "fixed",
-          top: "30%",
-          textAlign: "center",
-          width: "100%",
+          position: 'fixed',
+          top: '30%',
+          textAlign: 'center',
+          width: '100%',
         }}
       >
-        <CircularProgress />
+        <CircularProgress/>
       </div>
     );
   }
-
+  
   return (
     <ThemeProvider theme={theme}>
-      <Menu title={"Todolists"} />
-      {status === "loading" && <LinearProgress />}
-      <div className="App" color={"info"}>
+      <MainMenu title={'Todolist'}/>
+      {status === 'loading' && <LinearProgress/>}
+      <div className="App" color={'info'}>
         <Grid container spacing={4}>
           <Routes>
-            <Route path={"/"} element={<TodolistList />} />
-            <Route path={"/login"} element={<Login />} />
-            <Route path={"404"} element={<ErrorPage />} />
-            <Route path={"*"} element={<Navigate to={"404"} />} />
+            <Route path={'/'} element={<TodolistList/>}/>
+            <Route path={'/login'} element={<Login/>}/>
+            <Route path={'404'} element={<ErrorPage/>}/>
+            <Route path={'*'} element={<Navigate to={'404'}/>}/>
           </Routes>
-          <ErrorSnackbar />
+          <ErrorSnackbar/>
         </Grid>
       </div>
     </ThemeProvider>

@@ -29,7 +29,7 @@ export const TodolistList = () => {
   useEffect(() => {
     if (!isLoggedIn) return;
     dispatch(GetTodo);
-  }, []);
+  }, [dispatch, isLoggedIn]);
 
   if (!isLoggedIn) {
     return <Navigate to={"/login"} />;
