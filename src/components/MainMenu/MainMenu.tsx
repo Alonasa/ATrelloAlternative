@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import {useAppDispatch, useAppSelector} from 'app/store';
 import {logOutTC} from 'features/login/auth-reducer';
 import {Menu, MenuItem} from '@mui/material';
-import {NavLink} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 type MenuType = {
   title: string;
@@ -70,8 +70,7 @@ export const MainMenu = (props: MenuType) => {
 			onClose={handleCloseNavMenu}
 		  >
 			{isLoggedIn ? (
-			  <NavLink to={'/login'}
-					   className={(navData) => navDataStyleHandler(navData.isActive)}>
+			  <Link to={'/login'}>
 				<MenuItem onClick={handleCloseNavMenu} key={'logout'}>
 				  <Typography variant="h6" color="inherit" component="div">
 					<Button variant={'text'} onClick={logOutHandler}
@@ -80,7 +79,7 @@ export const MainMenu = (props: MenuType) => {
 					</Button>
 				  </Typography>
 				</MenuItem>
-			  </NavLink>
+			  </Link>
 			) : (<NavLink to={'/login'}
 						  className={(navData) => navDataStyleHandler(navData.isActive)}>
 			  <MenuItem onClick={handleCloseNavMenu} key={'login'}>
