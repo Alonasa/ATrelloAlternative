@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/ATrelloAlternative/static/css/main.e7d0a9c0.css",
-    "main.js": "/ATrelloAlternative/static/js/main.1f2c4e46.js",
+    "main.css": "/ATrelloAlternative/static/css/main.19c7bad1.css",
+    "main.js": "/ATrelloAlternative/static/js/main.8446dc58.js",
     "index.html": "/ATrelloAlternative/index.html",
-    "main.e7d0a9c0.css.map": "/ATrelloAlternative/static/css/main.e7d0a9c0.css.map",
-    "main.1f2c4e46.js.map": "/ATrelloAlternative/static/js/main.1f2c4e46.js.map"
+    "main.19c7bad1.css.map": "/ATrelloAlternative/static/css/main.19c7bad1.css.map",
+    "main.8446dc58.js.map": "/ATrelloAlternative/static/js/main.8446dc58.js.map"
   },
   "entrypoints": [
-    "static/css/main.e7d0a9c0.css",
-    "static/js/main.1f2c4e46.js"
+    "static/css/main.19c7bad1.css",
+    "static/js/main.8446dc58.js"
   ]
 }
