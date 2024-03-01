@@ -7,7 +7,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Menu } from 'components/Menu/Menu';
+import { MainMenu } from 'components/MainMenu/MainMenu';
 import { useAppDispatch, useAppSelector } from "./store";
 import { FilterValueType } from 'todolist/Todolist';
 import { RequestStatusType } from "./app-reducer";
@@ -86,7 +86,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Menu title={"Todolists"} />
+      <MainMenu title={"Todolists"} />
       {status === "loading" && <LinearProgress />}
       <div className="App" color={"info"}>
         <Grid container spacing={4}>
