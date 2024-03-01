@@ -6,7 +6,7 @@ export const ErrorPage = () => {
   return (
     <Grid item>
       <h1>Page is not found</h1>
-      <p>Try to  <Link to={'/login'}>Login</Link></p>
+      <p>You can come back to <Link to={'/'}>Main Page</Link></p>
     </Grid>
   );
 };

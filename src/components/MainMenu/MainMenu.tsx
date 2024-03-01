@@ -50,9 +50,7 @@ export const MainMenu = (props: MenuType) => {
           >
             <MenuIcon/>
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            {title}
-          </Typography>
+            <Link to={'/'} style={{color: 'white', textDecoration: 'none'}}>{title}</Link>
           <Menu
             id="menu-appbar"
             title="My title"
